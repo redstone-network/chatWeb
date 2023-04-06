@@ -28,7 +28,7 @@ export const getChatCompletion = async (
 };
 export const getData = async ( msg: string) => {
 
-  const response = await fetch(`${import.meta.env.VITE_REQUEST_URL}/query/?content="${msg}"`, {
+  const response = await fetch(`${import.meta.env.VITE_REQUEST_URL}/querypro/?content="${msg}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
