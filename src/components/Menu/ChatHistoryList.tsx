@@ -131,15 +131,28 @@ const ChatHistoryList = () => {
       onDragLeave={handleDragLeave}
       onDragEnd={handleDragEnd}
     >
-      <div className='flex flex-col gap-2 text-gray-100 text-sm'>
-        {Object.keys(folders).map((folderName, folderIndex) => (
+      <div className='px-3 mt-3'>
+        <div className='flex items-center border rounded-full h-7 pl-2 focus-within:ring focus-within:border-blue-500 ring-blue-500 relative shrink-0'>
+          <label
+            className='i-lucide-search text-zinc-500 '
+            htmlFor='sidebar-search'
+          ></label>
+          <input
+            id='sidebar-search'
+            className='bg-transparent flex-grow outline-none h-full px-2'
+            value=''
+          />
+        </div>
+      </div>
+      <div className='flex flex-col gap-1 p-2 text-sm'>
+        {/* {Object.keys(folders).map((folderName, folderIndex) => (
           <ChatFolder
             folderName={folderName}
             folderChats={folders[folderName]}
             folderIndex={folderIndex}
             key={folderName}
           />
-        ))}
+        ))} */}
         {noFolders.map(({ title, index }) => (
           <ChatHistory
             title={title}

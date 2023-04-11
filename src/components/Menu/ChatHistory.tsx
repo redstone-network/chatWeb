@@ -11,9 +11,9 @@ import useStore from '@store/store';
 
 const ChatHistoryClass = {
   normal:
-    'flex py-3 px-3 items-center gap-3 relative rounded-md bg-gray-900 hover:bg-[#2A2B32] break-all hover:pr-4 group transition-opacity',
+    'flex py-3 px-3 items-center gap-3 relative rounded-md break-all hover:pr-4 group transition-opacity',
   active:
-    'flex py-3 px-3 items-center gap-3 relative rounded-md break-all pr-14 bg-gray-800 hover:bg-gray-800 group transition-opacity',
+    'flex py-3 px-3 items-center gap-3 relative rounded-md break-all pr-14 bg-zinc-300  group transition-opacity',
   normalGradient:
     'absolute inset-y-0 right-0 w-8 z-10 bg-gradient-to-l from-gray-900 group-hover:from-[#2A2B32]',
   activeGradient:
@@ -93,7 +93,7 @@ const ChatHistory = React.memo(
           generating
             ? 'cursor-not-allowed opacity-40'
             : 'cursor-pointer opacity-100'
-        }`}
+        } group px-2 h-8 flex items-center justify-between rounded-lg hover:bg-zinc-200`}
         onClick={() => {
           if (!generating) setCurrentChatIndex(chatIndex);
         }}
@@ -101,7 +101,7 @@ const ChatHistory = React.memo(
         onDragStart={handleDragStart}
       >
         <ChatIcon />
-        <div className='flex-1 text-ellipsis max-h-5 overflow-hidden break-all relative'>
+        <div className='flex-1 text-ellipsis max-h-5 overflow-hidden break-all relative text-black'>
           {isEdit ? (
             <input
               type='text'
@@ -116,7 +116,7 @@ const ChatHistory = React.memo(
           ) : (
             _title
           )}
-
+{/* 
           {isEdit || (
             <div
               className={
@@ -125,29 +125,29 @@ const ChatHistory = React.memo(
                   : ChatHistoryClass.normalGradient
               }
             />
-          )}
+          )} */}
         </div>
         {active && (
-          <div className='absolute flex right-1 z-10 text-gray-300 visible'>
+          <div className='absolute flex right-1 z-1 visible text-black'>
             {isDelete || isEdit ? (
               <>
-                <button className='p-1 hover:text-white' onClick={handleTick}>
+                <button className='p-1' onClick={handleTick}>
                   <TickIcon />
                 </button>
-                <button className='p-1 hover:text-white' onClick={handleCross}>
+                <button className='p-1' onClick={handleCross}>
                   <CrossIcon />
                 </button>
               </>
             ) : (
               <>
                 <button
-                  className='p-1 hover:text-white'
+                  className='p-1'
                   onClick={() => setIsEdit(true)}
                 >
                   <EditIcon />
                 </button>
                 <button
-                  className='p-1 hover:text-white'
+                  className='p-1'
                   onClick={() => setIsDelete(true)}
                 >
                   <DeleteIcon />

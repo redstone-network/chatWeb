@@ -17,7 +17,7 @@ const Chat = () => {
   return (
     <div
       className={`flex h-full flex-1 flex-col ${
-        hideSideMenu ? 'md:pl-0' : 'md:pl-[260px]'
+        hideSideMenu ? 'md:pl-0' : 'md:pl-80'
       }`}
     >
       <MobileBar />
