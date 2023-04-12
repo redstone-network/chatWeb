@@ -39,11 +39,11 @@ export const getData = async ( msg: string) => {
     if (text.includes('model_not_found')) {
       throw new Error(
         text +
-          '\nMessage from ChatLink:\nPlease ensure that you have access to the GPT-4 API!'
+          '\nMessage from ChatData:\nPlease ensure that you have access to the GPT-4 API!'
       );
     } else {
       throw new Error(
-        'Message from ChatLink:\nInvalid API endpoint! We recommend you to check your free API endpoint.'
+        'Message from ChatData:\nInvalid API endpoint! We recommend you to check your free API endpoint.'
       );
     }
   }
@@ -53,7 +53,7 @@ export const getData = async ( msg: string) => {
     let error = text;
     if (text.includes('insufficient_quota')) {
       error +=
-        '\nMessage from ChatLink:\nWe recommend changing your API endpoint or API key';
+        '\nMessage from ChatData:\nWe recommend changing your API endpoint or API key';
     } else {
       error += '\nRate limited! Please try again later.';
     }
@@ -89,11 +89,11 @@ export const getChatCompletionStream = async (
     if (text.includes('model_not_found')) {
       throw new Error(
         text +
-          '\nMessage from ChatLink:\nPlease ensure that you have access to the GPT-4 API!'
+          '\nMessage from ChatData:\nPlease ensure that you have access to the GPT-4 API!'
       );
     } else {
       throw new Error(
-        'Message from ChatLink:\nInvalid API endpoint! We recommend you to check your free API endpoint.'
+        'Message from ChatData:\nInvalid API endpoint! We recommend you to check your free API endpoint.'
       );
     }
   }
@@ -103,7 +103,7 @@ export const getChatCompletionStream = async (
     let error = text;
     if (text.includes('insufficient_quota')) {
       error +=
-        '\nMessage from ChatLink:\nWe recommend changing your API endpoint or API key';
+        '\nMessage from ChatData:\nWe recommend changing your API endpoint or API key';
     } else {
       error += '\nRate limited! Please try again later.';
     }

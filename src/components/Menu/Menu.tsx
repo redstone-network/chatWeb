@@ -39,7 +39,7 @@ const Menu = () => {
         <div className='flex h-full min-h-0 flex-col'>
           <div className='scrollbar-trigger flex h-full w-full flex-1 items-start border-white/20'>
             <nav className='flex h-full flex-1 flex-col space-y-1'>
-            <header className="pt-4 h-12 pb-1 flex items-center px-4 justify-between"><a href="/"><span className="font-extrabold inline-block text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-yellow-500 text-xl">ChatData</span></a></header>
+            <header className="pt-4 h-12 pb-1 flex items-center px-4 justify-between"><a href="/"><span className="font-extrabold inline-block text-transparent bg-clip-text bg-gradient-to-r from-logStart to-logEnd text-xl">ChatData</span></a></header>
               <ChatHistoryList />
               {/* <MenuOptions /> */}
               <NewChat />

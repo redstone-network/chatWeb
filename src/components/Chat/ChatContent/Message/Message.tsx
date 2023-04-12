@@ -50,9 +50,12 @@ const Message = React.memo(
           messageIndex % 2 ? 'justify-end' : 'justify-start'
         } `}
       >
+        {!(messageIndex % 2) && <div className='h-10 w-10 rounded-xl inline-flex items-center justify-center text-2xl bg-teal-500 mr-2 text-white'>
+          <span className='i-simple-icons-openai'></span>
+        </div>}
         <div
-          className={`text-sm px-3 py-1.5 flex transition-all flex-col ease-in-out card ${
-            messageIndex % 2 ? 'bg-blue-600	 text-white' : ''
+          className={`text-sm flex transition-all max-w-[80%] flex-col ease-in-out rounded-2xl px-4 py-3 w-fit ${
+            messageIndex % 2 ? ' bg-blue-500 text-white	' : 'bg-zinc-100'
           }`}
         >
           <MessageContent
@@ -62,12 +65,14 @@ const Message = React.memo(
             sticky={sticky}
           />
 
-          {role && role === 'system' && (
+          {/* {role && role === 'system' && (
             <div>
               {questions.map((item) => (
                 <span key={item.id} className='flex'>
                   <span
-                    onClick={() => { handle(item.question)}}
+                    onClick={() => {
+                      handle(item.question);
+                    }}
                     className='text-blue-500 cursor-pointer align-middle flex items-center mr-1'
                   >
                     <SendIcon />
@@ -76,7 +81,7 @@ const Message = React.memo(
                 </span>
               ))}
             </div>
-          )}
+          )} */}
         </div>
       </div>
     );

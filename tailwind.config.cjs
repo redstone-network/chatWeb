@@ -58,8 +58,11 @@ module.exports = {
           800: '#343541',
           900: '#202123',
         },
+        logStart: '#4EBE96',
+        logEnd: '#A4DA5E',
       },
     },
+
   },
   plugins: [require('@tailwindcss/typography'), require('tailwind-scrollbar')],
   darkMode: 'class',

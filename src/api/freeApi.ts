@@ -39,7 +39,7 @@ export const getChatCompletionStream = async (
   });
   if (response.status === 404 || response.status === 405)
     throw new Error(
-      'Message from ChatLink:\nInvalid API endpoint! We recommend you to check your free API endpoint.'
+      'Message from ChatData:\nInvalid API endpoint! We recommend you to check your free API endpoint.'
     );
 
   if (response.status === 429 || !response.ok) {
@@ -47,7 +47,7 @@ export const getChatCompletionStream = async (
     let error = text;
     if (text.includes('insufficient_quota')) {
       error +=
-        '\nMessage from ChatLink:\nWe recommend changing your API endpoint or API key';
+        '\nMessage from ChatData:\nWe recommend changing your API endpoint or API key';
     }
     throw new Error(error);
   }

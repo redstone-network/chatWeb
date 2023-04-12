@@ -155,33 +155,69 @@ const EditView = ({
   }, []);
 
   return (
-    <div className='w-full flex items-center'>
-      <div
-        className={`w-full ${
-          sticky
-            ? 'px-2 border border-black/10 bg-white dark:border-gray-900/50 dark:text-white dark:bg-gray-700 rounded-md shadow-[0_0_10px_rgba(0,0,0,0.10)] dark:shadow-[0_0_15px_rgba(0,0,0,0.10)]'
-            : ''
-        }`}
-      >
-        <textarea
-          ref={textareaRef}
-          className='m-0 resize-none rounded-lg bg-transparent overflow-y-hidden focus:ring-0 focus-visible:ring-0 leading-7 w-full'
-          onChange={(e) => {
-            _setContent(e.target.value);
-          }}
-          value={_content}
-          onKeyDown={handleKeyDown}
-          rows={1}
-        ></textarea>
+    <div className='fixed bottom-0 left-0 right-0 shrink-0 px-3 py-3 bg-vert-light-gradient dark:bg-vert-dark-gradient transition-transform md:ml-80'>
+      <div className='mb-2'>
+        <div className='max-w-3xl mx-auto flex justify-center h-full items-center'>
+          <div className='text-xs flex items-center gap-2'>
+            <button
+              type='button'
+              className='rounded-lg px-2 text-sm inline-flex items-center justify-center border shrink-0 text-center disabled:pointer-events-none border-zinc-300 bg-white border-b-zinc-400/80 active:bg-zinc-200 h-8'
+            >
+              <span className='i-tabler-plus mr-[2px]'></span>New Chat
+            </button>
+            <button
+              type='button'
+              className='rounded-lg px-2 text-sm inline-flex items-center justify-center border shrink-0 text-center disabled:pointer-events-none border-zinc-300 bg-white border-b-zinc-400/80 active:bg-zinc-200 h-8'
+            >
+              <span className='mr-1 i-tabler-refresh'></span>Regenerate
+            </button>
+
+            <button
+              type='button'
+              id='radix-:rk:'
+              aria-haspopup='menu'
+              aria-expanded='false'
+              data-state='closed'
+              className='rounded-lg px-2 text-sm inline-flex items-center justify-center border shrink-0 text-center disabled:pointer-events-none border-zinc-300 bg-white border-b-zinc-400/80 active:bg-zinc-200 h-8'
+            >
+              <span className='i-tabler-dots'></span>
+            </button>
+          </div>
+        </div>
       </div>
-      <EditViewButtons
+      <div className='max-w-3xl mx-auto h-full'>
+        <div className='relative'>
+          <div className='flex items-center h-full bg-zinc-100 rounded-xl focus-within:ring-2 ring-blue-500'>
+            <textarea
+              ref={textareaRef}
+              className='flex-grow outline-none bg-transparent scroll-p-2 px-3 py-2 min-h-[2.6rem] rounded-xl resize-none'
+              placeholder='Type message or / to select a prompt'
+              onChange={(e) => {
+                _setContent(e.target.value);
+              }}
+              value={_content}
+              onKeyDown={handleKeyDown}
+              rows={1}
+            ></textarea>
+            <div className='pr-2 inline-flex items-center'>
+              <button
+                type='button'
+                className='h-8 w-8 hover:bg-zinc-300 rounded-xl inline-flex items-center justify-center'
+              >
+                <span className='i-tabler-send'></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* <EditViewButtons
         sticky={sticky}
         handleSaveAndSubmit={handleSaveAndSubmit}
         handleSave={handleSave}
         setIsModalOpen={setIsModalOpen}
         setIsEdit={setIsEdit}
         _setContent={_setContent}
-      />
+      /> */}
     </div>
   );
 };
