@@ -3,11 +3,7 @@ import useStore from '@store/store';
 
 import NewChat from './NewChat';
 import ChatHistoryList from './ChatHistoryList';
-import MenuOptions from './MenuOptions';
-
 import CrossIcon2 from '@icon/CrossIcon2';
-import DownArrow from '@icon/DownArrow';
-import MenuIcon from '@icon/MenuIcon';
 
 const Menu = () => {
   const hideSideMenu = useStore((state) => state.hideSideMenu);

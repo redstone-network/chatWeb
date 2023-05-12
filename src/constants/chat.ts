@@ -2,13 +2,6 @@ import { ChatInterface, ConfigInterface, ModelOptions } from '@type/chat';
 import useStore from '@store/store';
 
 const date = new Date();
-const dateString =
-  date.getFullYear() +
-  '-' +
-  ('0' + (date.getMonth() + 1)).slice(-2) +
-  '-' +
-  ('0' + date.getDate()).slice(-2);
-
 // default system message obtained using the following method: https://twitter.com/DeminDimin/status/1619935545144279040
 export const _defaultSystemMessage = `I am powered by GPT web3 data analytics tools will disrupt the blockchain industry by breaking the paradigm of traditional data analytics methods. By providing a user-centric, efficient, and customizable solution, we enable individuals and organizations to gain a deeper understanding of the web3 ecosystem, fostering innovation and growth in the blockchain space.`;
 

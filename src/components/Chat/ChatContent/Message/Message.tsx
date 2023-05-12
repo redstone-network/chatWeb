@@ -78,24 +78,6 @@ const Message = React.memo(
             messageIndex={messageIndex}
             sticky={sticky}
           />
-
-          {/* {role && role === 'system' && (
-            <div>
-              {questions.map((item) => (
-                <span key={item.id} className='flex'>
-                  <span
-                    onClick={() => {
-                      handle(item.question);
-                    }}
-                    className='text-blue-500 cursor-pointer align-middle flex items-center mr-1'
-                  >
-                    <SendIcon />
-                  </span>
-                  {item.question}
-                </span>
-              ))}
-            </div>
-          )} */}
         </div>
       </div>
     );

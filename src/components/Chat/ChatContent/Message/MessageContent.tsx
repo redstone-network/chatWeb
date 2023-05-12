@@ -13,7 +13,7 @@ import CodeBlock from './CodeBlock';
 import { codeLanguageSubset } from '@constants/chat';
 import useStore from '@store/store';
 import LoadingIcon from '@icon/LoadingIcon';
-
+import LineCHart from '@components/charts/LineChart';
 const MessageContent = ({
   role,
   content,
@@ -79,6 +79,9 @@ const ContentView = React.memo(
           >
             {content}
           </ReactMarkdown>
+          { messageIndex == 4 && <div className="py-4">
+            <LineCHart />
+          </div>}
           { content === '' && generating && <LoadingIcon />}
         </div>
       </>
