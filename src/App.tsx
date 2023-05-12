@@ -24,25 +24,21 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // legacy local storage
     const oldChats = localStorage.getItem('chats');
     const apiKey = localStorage.getItem('apiKey');
     const theme = localStorage.getItem('theme');
 
     if (apiKey) {
-      // legacy local storage
       setApiKey(apiKey);
       localStorage.removeItem('apiKey');
     }
 
     if (theme) {
-      // legacy local storage
       setTheme(theme as Theme);
       localStorage.removeItem('theme');
     }
 
     if (oldChats) {
-      // legacy local storage
       try {
         const chats: ChatInterface[] = JSON.parse(oldChats);
         if (chats.length > 0) {

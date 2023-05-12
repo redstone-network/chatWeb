@@ -38,7 +38,7 @@ const Chat = () => {
             aria-expanded='false'
             aria-controls='radix-:r8:'
             data-state='closed'
-            className='rounded-lg px-2 text-sm inline-flex items-center justify-center border shrink-0 text-center disabled:pointer-events-none border-zinc-300 bg-white border-b-zinc-400/80 active:bg-zinc-200 h-8 text-blue-500 font-semibold'
+            className='rounded-lg px-2 text-sm inline-flex items-center justify-center border shrink-0 text-center disabled:pointer-events-none border-zinc-300 bg-white border-b-zinc-400/80 active:bg-zinc-200 h-8 text-logStart font-semibold'
           >
             <span className='mr-1 i-ion-diamond-outline text-lg'></span>
           </button>
