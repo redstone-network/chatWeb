@@ -65,6 +65,9 @@ module.exports = {
         btnStart: '#83F3F9',
         btnEnd: '#66EBCA'
       },
+      width: {
+        '1100': '1100px',
+      }
     },
 
   },

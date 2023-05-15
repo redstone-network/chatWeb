@@ -1,5 +1,5 @@
 import LogoIcon from '@icon/LogoIcon';
-import HomeBG from '@icon/HomeBG';
+import HomeBG from '@src/assets/background.png';
 export default function name() {
   const goToBeta = () => {
     window.location.href = 'https://forms.gle/2sLg51Q6tfavRqDMA';
@@ -7,7 +7,7 @@ export default function name() {
   return (
     <div className='bg-white min-h-screen flex flex-col'>
       <div className='flex items-center justify-between'>
-        <div className='flex items-center'>
+        <div className='flex items-center pt-7'>
           <div className='w-20 mr-7 ml-10'>
             <LogoIcon />
           </div>
@@ -15,10 +15,10 @@ export default function name() {
             ChatData Insight
           </div>
         </div>
-        <div className='pr-14 pt-7'>
-          <button className='text-homeMain border-solid border-2 rounded-md	 px-16 py-2 border-homeMain font-urbanist text-2xl'>
+        <div className='pr-14'>
+          {/* <button className='text-homeMain border-solid border-2 rounded-md	 px-16 py-2 border-homeMain font-urbanist text-2xl'>
             Sign In
-          </button>
+          </button> */}
         </div>
       </div>
       <div className='flex-grow'>
@@ -37,7 +37,9 @@ export default function name() {
             </button>
           </div>
         </div>
-        <div className="absolute bottom-0	right-0 transform translate-x-4 translate-y-4"><HomeBG/></div>
+        <div className="absolute w-8/12 bottom-0	right-0">
+          <img src={HomeBG} alt="" />
+        </div>
       </div>
     </div>
   );
