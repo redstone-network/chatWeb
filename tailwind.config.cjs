@@ -33,6 +33,7 @@ module.exports = {
         'Noto Color Emoji',
       ],
       mono: ['Söhne Mono', 'Monaco', 'Andale Mono', 'Ubuntu Mono', 'monospace'],
+      urbanist: ['Urbanist']
     },
     extend: {
       typography: {
@@ -60,6 +61,9 @@ module.exports = {
         },
         logStart: '#4EBE96',
         logEnd: '#A4DA5E',
+        homeMain: '#68ECCD',
+        btnStart: '#83F3F9',
+        btnEnd: '#66EBCA'
       },
     },
 
