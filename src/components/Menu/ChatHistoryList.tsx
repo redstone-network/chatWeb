@@ -1,9 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import useStore from '@store/store';
 import { shallow } from 'zustand/shallow';
-
-import NewFolder from './NewFolder';
-import ChatFolder from './ChatFolder';
 import ChatHistory from './ChatHistory';
 
 import {
@@ -22,33 +19,21 @@ const ChatHistoryList = () => {
     shallow
   );
 
-  const [isHover, setIsHover] = useState<boolean>(false);
-  const [folders, setFolders] = useState<ChatHistoryFolderInterface>({});
-  const [noFolders, setNoFolders] = useState<ChatHistoryInterface[]>([]);
+  const [chatItems, setChatItems] = useState<ChatHistoryInterface[]>([]);
   const chatsRef = useRef<ChatInterface[]>(useStore.getState().chats || []);
   const foldersNameRef = useRef<string[]>(useStore.getState().foldersName);
 
   const updateFolders = () => {
-    const _folders: ChatHistoryFolderInterface = {};
-    const _noFolders: ChatHistoryInterface[] = [];
+    const _chatItems: ChatHistoryInterface[] = [];
     const chats = useStore.getState().chats;
-    const foldersName = useStore.getState().foldersName;
-
-    foldersName.forEach((f) => (_folders[f] = []));
 
     if (chats) {
       chats.forEach((chat, index) => {
-        if (!chat.folder) {
-          _noFolders.push({ title: chat.title, index: index });
-        } else {
-          if (!_folders[chat.folder]) _folders[chat.folder] = [];
-          _folders[chat.folder].push({ title: chat.title, index: index });
-        }
+        _chatItems.push({ title: chat.title, index: index });
       });
     }
 
-    setFolders(_folders);
-    setNoFolders(_noFolders);
+    setChatItems(_chatItems);
   };
 
   useEffect(() => {
@@ -76,60 +61,12 @@ const ChatHistoryList = () => {
       currentChatIndex < chatTitles.length
     ) {
       document.title = chatTitles[currentChatIndex];
-
-      const chats = useStore.getState().chats;
-      if (chats) {
-        const folderIndex = useStore
-          .getState()
-          .foldersName.findIndex((f) => f === chats[currentChatIndex].folder);
-
-        if (folderIndex) {
-          const updatedFolderExpanded = [
-            ...useStore.getState().foldersExpanded,
-          ];
-          updatedFolderExpanded[folderIndex] = true;
-          useStore.getState().setFoldersExpanded(updatedFolderExpanded);
-        }
-      }
     }
   }, [currentChatIndex, chatTitles]);
 
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    if (e.dataTransfer) {
-      e.stopPropagation();
-      setIsHover(false);
-
-      const chatIndex = Number(e.dataTransfer.getData('chatIndex'));
-      const updatedChats: ChatInterface[] = JSON.parse(
-        JSON.stringify(useStore.getState().chats)
-      );
-      delete updatedChats[chatIndex].folder;
-      setChats(updatedChats);
-    }
-  };
-
-  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setIsHover(true);
-  };
-
-  const handleDragLeave = () => {
-    setIsHover(false);
-  };
-
-  const handleDragEnd = () => {
-    setIsHover(false);
-  };
-
   return (
     <div
-      className={`flex-col flex-1 overflow-y-auto border-b border-white/20 ${
-        isHover ? 'bg-gray-800/40' : ''
-      }`}
-      onDrop={handleDrop}
-      onDragOver={handleDragOver}
-      onDragLeave={handleDragLeave}
-      onDragEnd={handleDragEnd}
+      className={`flex-col flex-1 overflow-y-auto border-b border-white/20`}
     >
       <div className='px-3 mt-3'>
         <div className='flex items-center border rounded-full h-7 pl-2 focus-within:ring focus-within:border-blue-500 ring-blue-500 relative shrink-0'>
@@ -145,15 +82,7 @@ const ChatHistoryList = () => {
         </div>
       </div>
       <div className='flex flex-col gap-1 p-2 text-sm'>
-        {/* {Object.keys(folders).map((folderName, folderIndex) => (
-          <ChatFolder
-            folderName={folderName}
-            folderChats={folders[folderName]}
-            folderIndex={folderIndex}
-            key={folderName}
-          />
-        ))} */}
-        {noFolders.map(({ title, index }) => (
+        {chatItems.map(({ title, index }) => (
           <ChatHistory
             title={title}
             key={`${title}-${index}`}

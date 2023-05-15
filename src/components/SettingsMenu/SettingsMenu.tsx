@@ -4,7 +4,7 @@ import useStore from '@store/store';
 
 import PopupModal from '@components/PopupModal';
 import SettingIcon from '@icon/SettingIcon';
-import ThemeSwitcher from '@components/Menu/MenuOptions/ThemeSwitcher';
+import ThemeSwitcher from '@components/Menu/ThemeSwitcher';
 import LanguageSelector from '@components/LanguageSelector';
 
 const SettingsMenu = () => {

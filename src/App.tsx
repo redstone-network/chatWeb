@@ -53,7 +53,6 @@ function App() {
       }
       localStorage.removeItem('chats');
     } else {
-      // existing local storage
       const chats = useStore.getState().chats;
       const currentChatIndex = useStore.getState().currentChatIndex;
       if (!chats || chats.length === 0) {

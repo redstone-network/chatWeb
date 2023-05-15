@@ -34,21 +34,6 @@ const NewChat = () => {
         </button>
       </div>
     </div>
-    // <a
-    //   className={`max-md:hidden flex py-3 rounded-md transition-colors duration-200 text-sm md:mb-2 flex-shrink-0 md:border transition-opacity ${
-    //     generating
-    //       ? 'cursor-not-allowed opacity-40'
-    //       : 'cursor-pointer opacity-100'
-    //   } border-t text-sm text-zinc-500 shrink-0 px-4 py-2 flex justify-between items-center gap-3`}
-    //   onClick={() => {
-    //     if (!generating) addChat();
-    //   }}
-    // >
-    //   <PlusIcon />{' '}
-    //   <span className='hidden md:inline-flex text-sm'>
-    //     {t('newChat')}
-    //   </span>
-    // </a>
   );
 };
 
