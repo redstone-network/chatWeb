@@ -33,7 +33,7 @@ module.exports = {
         'Noto Color Emoji',
       ],
       mono: ['Söhne Mono', 'Monaco', 'Andale Mono', 'Ubuntu Mono', 'monospace'],
-      urbanist: ['Urbanist']
+      urbanist: ['roboto', 'Urbanist']
     },
     extend: {
       typography: {
@@ -69,7 +69,6 @@ module.exports = {
         '1100': '1100px',
       }
     },
-
   },
   plugins: [require('@tailwindcss/typography'), require('tailwind-scrollbar')],
   darkMode: 'class',

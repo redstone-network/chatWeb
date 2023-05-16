@@ -12,7 +12,7 @@ export default function name() {
             <LogoIcon />
           </div>
           <div className='text-homeMain font-urbanist text-3xl font-extrabold'>
-            ChatData Insight Insight
+            ChatData Insight
           </div>
         </div>
         <div className='pr-14'>
