@@ -14,30 +14,7 @@ import { codeLanguageSubset } from '@constants/chat';
 import useStore from '@store/store';
 import LoadingIcon from '@icon/LoadingIcon';
 import LineCHart from '@components/charts/LineChart';
-const MessageContent = ({
-  role,
-  content,
-  messageIndex,
-  sticky = false,
-}: {
-  role: string;
-  content: string;
-  messageIndex: number;
-  sticky?: boolean;
-}) => {
-  const [isEdit, setIsEdit] = useState<boolean>(sticky);
 
-  return (
-    <div className='relative flex'>
-      <ContentView
-        role={role}
-        content={content}
-        setIsEdit={setIsEdit}
-        messageIndex={messageIndex}
-      />
-    </div>
-  );
-};
 
 const ContentView = React.memo(
   ({
@@ -116,5 +93,28 @@ const P = React.memo(
   }
 );
 
+const MessageContent = ({
+  role,
+  content,
+  messageIndex,
+  sticky = false,
+}: {
+  role: string;
+  content: string;
+  messageIndex: number;
+  sticky?: boolean;
+}) => {
+  const [isEdit, setIsEdit] = useState<boolean>(sticky);
 
+  return (
+    <div className='relative flex'>
+      <ContentView
+        role={role}
+        content={content}
+        setIsEdit={setIsEdit}
+        messageIndex={messageIndex}
+      />
+    </div>
+  );
+};
 export default MessageContent;
