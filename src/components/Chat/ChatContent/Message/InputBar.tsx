@@ -210,14 +210,6 @@ const EditView = ({
           </div>
         </div>
       </div>
-      {/* <EditViewButtons
-        sticky={sticky}
-        handleSaveAndSubmit={handleSaveAndSubmit}
-        handleSave={handleSave}
-        setIsModalOpen={setIsModalOpen}
-        setIsEdit={setIsEdit}
-        _setContent={_setContent}
-      /> */}
     </div>
   );
 };
