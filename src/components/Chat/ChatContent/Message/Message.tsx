@@ -19,17 +19,17 @@ const Message = React.memo(
     return (
       <div
         className={`w-full text-gray-800 dark:text-gray-100 flex py-4 ${
-          messageIndex % 2 ? 'justify-end' : 'justify-start'
+          role === 'user' ? 'justify-end' : 'justify-start'
         } `}
       >
-        {!(messageIndex % 2) && (
+        {!(role === 'user') && (
           <div className='h-10 w-10 rounded-xl inline-flex items-center justify-center text-2xl mr-2 text-white'>
             <AvartorIcon />
           </div>
         )}
         <div
           className={`text-sm flex transition-all max-w-[80%] flex-col ease-in-out rounded-2xl px-4 py-3 w-fit ${
-            messageIndex % 2 ? ' bg-blue-500 text-white	' : 'bg-zinc-100'
+            role === 'user' ? ' bg-blue-500 text-white	' : 'bg-zinc-100'
           }`}
         >
           <MessageContent

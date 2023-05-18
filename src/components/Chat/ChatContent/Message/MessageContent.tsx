@@ -56,9 +56,6 @@ const ContentView = React.memo(
           >
             {content}
           </ReactMarkdown>
-          { messageIndex == 4 && <div className="py-4">
-            <LineCHart />
-          </div>}
           { content === '' && generating && <LoadingIcon />}
         </div>
       </>

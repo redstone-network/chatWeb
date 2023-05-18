@@ -78,6 +78,8 @@ const EditView = ({
   const inputRole = useStore((state) => state.inputRole);
   const setChats = useStore((state) => state.setChats);
   const currentChatIndex = useStore((state) => state.currentChatIndex);
+  const error = useStore((state) => state.error);
+  const setError = useStore((state) => state.setError);
 
   const [_content, _setContent] = useState<string>(content);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -99,6 +101,11 @@ const EditView = ({
     }
   };
 
+  const clickHandle = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    handleSaveAndSubmit();
+    resetTextAreaHeight();
+  };
   const handleSave = () => {
     if (sticky && _content === '') return;
     const updatedChats: ChatInterface[] = JSON.parse(
@@ -156,6 +163,7 @@ const EditView = ({
 
   return (
     <div className='fixed bottom-0 left-0 right-0 shrink-0 px-3 py-3 bg-vert-light-gradient dark:bg-vert-dark-gradient transition-transform md:ml-80'>
+      {error && <div className="text-center max-w-3xl mx-auto p-2 border rounded-md	border-rose-700	text-rose-700 mb-2">{error}</div>}
       <div className='mb-2'>
         <div className='max-w-3xl mx-auto flex justify-center h-full items-center'>
           <div className='text-xs flex items-center gap-2'>
@@ -202,6 +210,7 @@ const EditView = ({
             <div className='pr-2 inline-flex items-center'>
               <button
                 type='button'
+                onClick={clickHandle}
                 className='h-8 w-8 hover:bg-zinc-300 rounded-xl inline-flex items-center justify-center'
               >
                 <span className='i-tabler-send'></span>

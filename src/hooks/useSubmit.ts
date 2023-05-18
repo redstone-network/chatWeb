@@ -2,9 +2,8 @@ import React from 'react';
 import useStore from '@store/store';
 import { useTranslation } from 'react-i18next';
 import { ChatInterface, MessageInterface } from '@type/chat';
-import { getChatCompletion, getChatCompletionStream, getData } from '@api/api';
+import { getChatCompletion, getData } from '@api/api';
 import { parseEventSource } from '@api/helper';
-import { limitMessageTokens } from '@utils/messageUtils';
 import { _defaultChatConfig } from '@constants/chat';
 import { officialAPIEndpoint } from '@constants/auth';
 
@@ -48,10 +47,14 @@ const useSubmit = () => {
   };
 
   const handleSubmit = async (msg?: string) => {
+    console.log('ssss-handleSubmit')
     const chats = useStore.getState().chats;
+    console.log('ssss-handleSubmit', chats, generating)
+
     if (generating || !chats) return;
 
     const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(chats));
+    console.log('ssss-handleSubmit', updatedChats)
 
     updatedChats[currentChatIndex].messages.push({
       role: 'assistant',
@@ -66,36 +69,8 @@ const useSubmit = () => {
       if (chats[currentChatIndex].messages.length === 0)
         throw new Error('No messages submitted!');
 
-      const messages = limitMessageTokens(
-        chats[currentChatIndex].messages,
-        chats[currentChatIndex].config.max_tokens,
-        chats[currentChatIndex].config.model
-      );
-      if (messages.length === 0) throw new Error('Message exceed max token!');
 
-      // no api key (free)
-      if (!apiKey || apiKey.length === 0) {
-        // official endpoint
-        if (apiEndpoint === officialAPIEndpoint) {
-          throw new Error(t('noApiKeyWarning') as string);
-        }
-
-        // other endpoints
-        stream = await getChatCompletionStream(
-          useStore.getState().apiEndpoint,
-          messages,
-          chats[currentChatIndex].config
-        );
-      } else if (apiKey) {
-        // own apikey
-        // stream = await getChatCompletionStream(
-        //   useStore.getState().apiEndpoint,
-        //   messages,
-        //   chats[currentChatIndex].config,
-        //   apiKey
-        // );
-        stream = await getData(msg || '')
-      }
+      stream = await getData(msg || '')
 
       if (stream) {
         if (stream.locked)
@@ -175,6 +150,12 @@ const useSubmit = () => {
       const err = (e as Error).message;
       console.log(err);
       setError(err);
+      const chats = useStore.getState().chats;
+      const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(chats));
+      updatedChats[currentChatIndex].messages.pop();
+      setChats(updatedChats);
+      setGenerating(false);
+
     }
     setGenerating(false);
   };

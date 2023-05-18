@@ -28,7 +28,7 @@ export const getChatCompletion = async (
 };
 export const getData = async ( msg: string) => {
 
-  const response = await fetch(`${import.meta.env.VITE_REQUEST_URL}/querypro/?content="${msg}"`, {
+  const response = await fetch(`${import.meta.env.VITE_REQUEST_URL}/integration/request?prompt="${msg}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -48,17 +48,12 @@ export const getData = async ( msg: string) => {
     }
   }
 
-  if (response.status === 429 || !response.ok) {
-    const text = await response.text();
-    let error = text;
-    if (text.includes('insufficient_quota')) {
-      error +=
-        '\nMessage from ChatData:\nWe recommend changing your API endpoint or API key';
-    } else {
-      error += '\nRate limited! Please try again later.';
-    }
+  if (response.status === 400 || !response.ok) {
+    const text = await response.json();
+    let error = text.message;
     throw new Error(error);
   }
+
 
   const stream = response.body;
   return stream;

@@ -5,7 +5,6 @@ import ChatHistory from './ChatHistory';
 
 import {
   ChatHistoryInterface,
-  ChatHistoryFolderInterface,
   ChatInterface,
 } from '@type/chat';
 
