@@ -56,6 +56,13 @@ const ContentView = React.memo(
             components={{
               code,
               p: P,
+              a: ({ node, ...props }) => {
+                return (
+                  <a className="text-blue-500 mb-4" {...props}>
+                    {props.children}
+                  </a>
+                )
+              }
             }}
           >
             {content}

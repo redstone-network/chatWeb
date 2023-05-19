@@ -3,7 +3,6 @@ import useStore from '@store/store';
 import { useTranslation } from 'react-i18next';
 import { ChatInterface, MessageInterface } from '@type/chat';
 import { getChatCompletion, getData } from '@api/api';
-import { parseEventSource } from '@api/helper';
 import { _defaultChatConfig } from '@constants/chat';
 import { officialAPIEndpoint } from '@constants/auth';
 
@@ -78,6 +77,10 @@ const useSubmit = () => {
       const updatedMessages = updatedChats[currentChatIndex].messages;
       if (res.question_type === 'binance_data') { 
         updatedMessages[updatedMessages.length - 1].content = res.data;
+      } else if (res.question_type === 'news') {
+        updatedMessages[updatedMessages.length - 1].content = res.data.map((item:any, index: number) => {
+          return `[${index+1}.${item.title}](${item.url})`
+        }).join('\n')
       } else {
         updatedMessages[updatedMessages.length - 1].content += res.data;
       }
