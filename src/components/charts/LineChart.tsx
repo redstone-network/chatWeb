@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useId } from 'react';
 import ReactDOM from 'react-dom';
 import Plotly from 'plotly.js-dist';
 
 const DemoStock = ({ data }: any) => {
+  const htmlId = useId();
   useEffect(() => {
     const trace1 = {
       x: data.map((d: { open_timestamp: any; }) => d.open_timestamp),
@@ -39,10 +40,10 @@ const DemoStock = ({ data }: any) => {
         type: 'linear'
       },
     };
-    Plotly.newPlot('myDiv', [trace1], layout);
+    Plotly.newPlot(htmlId, [trace1], layout);
   }, [data]);
   return (
-    <div id="myDiv"></div>
+    <div id={htmlId}></div>
   )
 };
 export default DemoStock;
