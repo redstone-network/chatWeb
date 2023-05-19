@@ -65,57 +65,70 @@ const useSubmit = () => {
     setGenerating(true);
 
     try {
-      let stream;
+      // let stream;
       if (chats[currentChatIndex].messages.length === 0)
         throw new Error('No messages submitted!');
 
 
-      stream = await getData(msg || '')
-
-      if (stream) {
-        if (stream.locked)
-          throw new Error(
-            'Oops, the stream is locked right now. Please try again'
-          );
-        const reader = stream.getReader();
-        let reading = true;
-        let partial = '';
-        while (reading && useStore.getState().generating) {
-          const { done, value } = await reader.read();
-          const result = parseEventSource(
-            partial + new TextDecoder().decode(value)
-          );
-          partial = '';
-
-          if (result === '[DONE]' || done) {
-            reading = false;
-          } else {
-            const resultString = result.reduce((output: string, curr) => {
-              if (typeof curr === 'string') {
-                output += curr;
-              } else {
-                const content = curr.choices[0].delta.content;
-                if (content) output += content;
-              }
-              return output;
-            }, '');
-
-            const updatedChats: ChatInterface[] = JSON.parse(
-              JSON.stringify(useStore.getState().chats)
-            );
-            const updatedMessages = updatedChats[currentChatIndex].messages;
-            updatedMessages[updatedMessages.length - 1].content += resultString;
-            setChats(updatedChats);
-          }
-        }
-        if (useStore.getState().generating) {
-          reader.cancel('Cancelled by user');
-        } else {
-          reader.cancel('Generation completed');
-        }
-        reader.releaseLock();
-        stream.cancel();
+      const res = await getData(msg || '')
+      console.log(res)
+      const updatedChats: ChatInterface[] = JSON.parse(
+        JSON.stringify(useStore.getState().chats)
+      );
+      const updatedMessages = updatedChats[currentChatIndex].messages;
+      if (res.question_type === 'binance_data') { 
+        updatedMessages[updatedMessages.length - 1].content = res.data;
+      } else {
+        updatedMessages[updatedMessages.length - 1].content += res.data;
       }
+        
+      updatedMessages[updatedMessages.length - 1].question_type = res.question_type;
+      setChats(updatedChats);
+      // if (stream) {
+      //   if (stream.locked)
+      //     throw new Error(
+      //       'Oops, the stream is locked right now. Please try again'
+      //     );
+      //   const reader = stream.getReader();
+      //   let reading = true;
+      //   let partial = '';
+      //   while (reading && useStore.getState().generating) {
+      //     const { done, value } = await reader.read();
+      //     const result = parseEventSource(
+      //       partial + new TextDecoder().decode(value)
+      //     );
+      //     partial = '';
+
+      //     if (result === '[DONE]' || done) {
+      //       reading = false;
+      //     } else {
+      //       const resultString = result.reduce((output: string, curr) => {
+      //         if (typeof curr === 'string') {
+      //           output += curr;
+      //         } else {
+      //           const content = curr.data;
+      //           if (content) output += content;
+      //         }
+      //         return output;
+      //       }, '');
+
+      //       const updatedChats: ChatInterface[] = JSON.parse(
+      //         JSON.stringify(useStore.getState().chats)
+      //       );
+      //       const updatedMessages = updatedChats[currentChatIndex].messages;
+      //       updatedMessages[updatedMessages.length - 1].content += resultString;
+      //       setChats(updatedChats);
+      //     }
+      //   }
+      //   console.log('dddd',partial )
+      //   if (useStore.getState().generating) {
+      //     reader.cancel('Cancelled by user');
+      //   } else {
+      //     reader.cancel('Generation completed');
+      //   }
+      //   reader.releaseLock();
+      //   stream.cancel();
+      // }
 
       // generate title for new chats
       const currChats = useStore.getState().chats;

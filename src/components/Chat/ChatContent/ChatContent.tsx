@@ -55,6 +55,7 @@ const ChatContent = () => {
                 <Message
                   role={message.role}
                   content={message.content}
+                  question_type = {message.question_type}
                   messageIndex={index}
                 />
               </React.Fragment>

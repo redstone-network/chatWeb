@@ -13,7 +13,7 @@ import CodeBlock from './CodeBlock';
 import { codeLanguageSubset } from '@constants/chat';
 import useStore from '@store/store';
 import LoadingIcon from '@icon/LoadingIcon';
-import LineCHart from '@components/charts/LineChart';
+import LineChart from '@components/charts/LineChart';
 
 
 const ContentView = React.memo(
@@ -21,9 +21,11 @@ const ContentView = React.memo(
     role,
     content,
     setIsEdit,
+    question_type,
     messageIndex,
   }: {
     role: string;
+    question_type: string;
     content: string;
     setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
     messageIndex: number;
@@ -32,7 +34,7 @@ const ContentView = React.memo(
     return (
       <>
         <div className='markdown w-full md:max-w-full break-words dark:prose-invert dark share-gpt-message'>
-          <ReactMarkdown
+          {question_type !== 'binance_data' && <ReactMarkdown
             remarkPlugins={[
               remarkGfm,
               [remarkMath, { singleDollarTextMath: false }],
@@ -55,7 +57,8 @@ const ContentView = React.memo(
             }}
           >
             {content}
-          </ReactMarkdown>
+          </ReactMarkdown>}
+          {question_type === 'binance_data' && <LineChart data={content} />}
           { content === '' && generating && <LoadingIcon />}
         </div>
       </>
@@ -94,10 +97,12 @@ const MessageContent = ({
   role,
   content,
   messageIndex,
+  question_type,
   sticky = false,
 }: {
   role: string;
   content: string;
+  question_type: string;
   messageIndex: number;
   sticky?: boolean;
 }) => {
@@ -108,6 +113,7 @@ const MessageContent = ({
       <ContentView
         role={role}
         content={content}
+        question_type={question_type}
         setIsEdit={setIsEdit}
         messageIndex={messageIndex}
       />

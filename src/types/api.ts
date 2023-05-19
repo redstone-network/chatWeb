@@ -1,9 +1,6 @@
 export interface EventSourceDataInterface {
-  choices: EventSourceDataChoices[];
-  created: number;
-  id: string;
-  model: string;
-  object: string;
+  data: string;
+  question_type: string;
 }
 
 export type EventSourceData = EventSourceDataInterface | '[DONE]';
