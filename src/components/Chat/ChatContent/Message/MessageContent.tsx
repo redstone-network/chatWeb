@@ -22,11 +22,13 @@ const ContentView = React.memo(
     content,
     setIsEdit,
     question_type,
+    messageLength,
     messageIndex,
   }: {
     role: string;
     question_type?: string;
     content: string;
+    messageLength: number;
     setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
     messageIndex: number;
   }) => {
@@ -59,7 +61,7 @@ const ContentView = React.memo(
             {content}
           </ReactMarkdown>}
           {question_type === 'binance_data' && <LineChart data={content} />}
-          { content === '' && generating && <LoadingIcon />}
+          { content === '' && generating && (messageIndex === messageLength -1) &&<LoadingIcon />}
         </div>
       </>
     );
@@ -97,12 +99,14 @@ const MessageContent = ({
   role,
   content,
   messageIndex,
+  messageLength,
   question_type,
   sticky = false,
 }: {
   role: string;
   content: string;
   question_type?: string;
+  messageLength: number;
   messageIndex: number;
   sticky?: boolean;
 }) => {
@@ -115,6 +119,7 @@ const MessageContent = ({
         content={content}
         question_type={question_type}
         setIsEdit={setIsEdit}
+        messageLength={messageLength}
         messageIndex={messageIndex}
       />
     </div>

@@ -9,12 +9,14 @@ const Message = React.memo(
     content,
     messageIndex,
     question_type,
+    messageLength,
     sticky = false,
   }: {
     role: Role;
     content: string;
     question_type?: string;
     messageIndex: number;
+    messageLength: number;
     sticky?: boolean;
   }) => {
 
@@ -39,6 +41,7 @@ const Message = React.memo(
             content={content}
             messageIndex={messageIndex}
             question_type={question_type}
+            messageLength={messageLength}
             sticky={sticky}
           />
         </div>
