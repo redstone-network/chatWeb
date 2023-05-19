@@ -13,7 +13,7 @@ const Message = React.memo(
   }: {
     role: Role;
     content: string;
-    question_type: string;
+    question_type?: string;
     messageIndex: number;
     sticky?: boolean;
   }) => {

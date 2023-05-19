@@ -25,7 +25,7 @@ const ContentView = React.memo(
     messageIndex,
   }: {
     role: string;
-    question_type: string;
+    question_type?: string;
     content: string;
     setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
     messageIndex: number;
@@ -102,7 +102,7 @@ const MessageContent = ({
 }: {
   role: string;
   content: string;
-  question_type: string;
+  question_type?: string;
   messageIndex: number;
   sticky?: boolean;
 }) => {
