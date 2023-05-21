@@ -76,7 +76,7 @@ const useSubmit = () => {
       );
       const updatedMessages = updatedChats[currentChatIndex].messages;
       if (res.question_type === 'binance_data') { 
-        updatedMessages[updatedMessages.length - 1].content = res.data;
+        updatedMessages[updatedMessages.length - 1].content = res.data || [];
       } else if (res.question_type === 'news') {
         updatedMessages[updatedMessages.length - 1].content = res.data.map((item:any, index: number) => {
           return `[${index+1}.${item.title}](${item.url})`

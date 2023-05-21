@@ -67,7 +67,7 @@ const ContentView = React.memo(
           >
             {content}
           </ReactMarkdown>}
-          {question_type === 'binance_data' && <LineChart data={content} />}
+          {question_type === 'binance_data' && content && <LineChart data={content} />}
           { content === '' && generating && (messageIndex === messageLength -1) &&<LoadingIcon />}
         </div>
       </>
