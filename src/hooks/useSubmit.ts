@@ -78,9 +78,9 @@ const useSubmit = () => {
       if (res.question_type === 'binance_data') { 
         updatedMessages[updatedMessages.length - 1].content = res.data || [];
       } else if (res.question_type === 'news') {
-        updatedMessages[updatedMessages.length - 1].content = res.data.map((item:any, index: number) => {
+        updatedMessages[updatedMessages.length - 1].content = res.data ? res.data.map((item:any, index: number) => {
           return `[${index+1}.${item.title}](${item.url})`
-        }).join('\n')
+        }).join('\n') : 'No relevant news found'
       } else {
         updatedMessages[updatedMessages.length - 1].content += res.data;
       }
