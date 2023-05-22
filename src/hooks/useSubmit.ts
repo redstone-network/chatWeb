@@ -82,7 +82,7 @@ const useSubmit = () => {
           return `[${index+1}.${item.title}](${item.url})`
         }).join('\n') : 'No relevant news found'
       } else {
-        updatedMessages[updatedMessages.length - 1].content += res.data;
+        updatedMessages[updatedMessages.length - 1].content += res.data.content;
       }
         
       updatedMessages[updatedMessages.length - 1].question_type = res.question_type;
