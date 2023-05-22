@@ -1,23 +1,34 @@
 import LogoIcon from '@icon/LogoIcon';
-import HomeBG from '@src/assets/background.png';
 import ChatDataInsight from '@src/assets/ChatDataInsight1.png';
 import Title from '@src/assets/title1.png';
 import Desc from '@src/assets/desc1.png';
+import Discord from '@icon/Discord';
+import Twitter from '@icon/Twitter';
 
 export default function name() {
   const goToBeta = () => {
     window.location.href = 'https://forms.gle/VXmvY3S7yN7torWT8';
   };
+  const goToDiscord = () => {
+    window.location.href = 'https://discord.com/invite/F7jAubYj8W';
+  };
+  const goToTwitter = () => {
+    window.location.href = 'https://twitter.com/ChatdataInsight';
+  };
   return (
     <div className='bg-white min-h-screen flex flex-col'>
-      <div className='flex items-center justify-between'>
-        <div className='flex items-center pt-7'>
-          <div className='sm:w-20 mr-7 ml-10 w-16'>
+      <div className='flex items-center justify-between shrink-0'>
+        <div className='flex items-center sm:pt-7'>
+          <div className='sm:w-20 sm:mr-7 mr-3 sm:ml-10 w-8 ml-4'>
             <LogoIcon />
           </div>
           <div className='text-homeMain font-urbanist text-3xl font-extrabold'>
-            <img className="sm:w-60 w-40" src={ ChatDataInsight} />
+            <img className="sm:w-60 w-32" src={ ChatDataInsight} />
           </div>
+        </div>
+        <div className="flex">
+            <div className="py-2 cursor-pointer sm:mx-8 mx-4 " onClick={goToDiscord}><Discord/></div>
+            <div className="py-2 cursor-pointer sm:mx-8 mx-4 md:mr-20" onClick={goToTwitter}><Twitter/></div>
         </div>
       </div>
       <div className='flex-grow bg-HomeBG sm:bg-[length:65%] bg-[length:100%] bg-no-repeat bg-right-bottom'>

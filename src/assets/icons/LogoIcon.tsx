@@ -3,6 +3,7 @@ import React from 'react';
 const Icon = () => {
   return (
     <svg
+      className="w-10 sm:w-12 md:w-14 lg:w-16 xl:w-20"
       width='80'
       height='54'
       viewBox='0 0 80 54'
