@@ -2,6 +2,7 @@ import React from 'react';
 import MessageContent from './MessageContent';
 import { Role } from '@type/chat';
 import AvartorIcon from '@icon/AvartorIcon';
+import AvartorIconUser from '@icon/AvartorIconUser';
 
 const Message = React.memo(
   ({
@@ -32,9 +33,7 @@ const Message = React.memo(
           </div>
         )}
         <div
-          className={`text-sm flex transition-all max-w-[80%] flex-col ease-in-out rounded-2xl px-4 py-3 w-fit ${
-            role === 'user' ? ' bg-blue-500 text-white	' : 'bg-zinc-100'
-          }`}
+          className={`text-base	 flex transition-all max-w-[80%] flex-col ease-in-out rounded-xl p-4 w-fit bg-white`}
         >
           <MessageContent
             role={role}
@@ -45,6 +44,11 @@ const Message = React.memo(
             sticky={sticky}
           />
         </div>
+        {(role === 'user') && (
+          <div className='h-10 w-10 rounded-xl inline-flex items-center justify-center text-2xl ml-2 text-white'>
+            <AvartorIconUser />
+          </div>
+        )}
       </div>
     );
   }

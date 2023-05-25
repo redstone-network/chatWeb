@@ -14,7 +14,7 @@ const Icon = () => {
         y='0.182007'
         width='101'
         height='101'
-        rx='29'
+        rx='50'
         fill='url(#paint0_linear_0_1)'
       />
       <path
@@ -41,8 +41,8 @@ const Icon = () => {
           y2='59.2269'
           gradientUnits='userSpaceOnUse'
         >
-          <stop stop-color='#4EBE96' />
-          <stop offset='1' stop-color='#A4DA5E' />
+          <stop stop-color='#66CCC6' />
+      <stop offset='1' stop-color='#75E3C8' />
         </linearGradient>
       </defs>
     </svg>
