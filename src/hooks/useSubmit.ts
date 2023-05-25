@@ -70,7 +70,7 @@ const useSubmit = () => {
 
 
       const res = await getData(msg || '')
-      console.log(res)
+      console.log('ssss', res)
       const updatedChats: ChatInterface[] = JSON.parse(
         JSON.stringify(useStore.getState().chats)
       );

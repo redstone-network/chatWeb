@@ -3,7 +3,7 @@ import useStore from '@store/store';
 
 const date = new Date();
 // default system message obtained using the following method: https://twitter.com/DeminDimin/status/1619935545144279040
-export const _defaultSystemMessage = `I am powered by GPT web3 data analytics tools will disrupt the blockchain industry by breaking the paradigm of traditional data analytics methods. By providing a user-centric, efficient, and customizable solution, we enable individuals and organizations to gain a deeper understanding of the web3 ecosystem, fostering innovation and growth in the blockchain space.`;
+export const _defaultSystemMessage = `I am an advanced web3 data analytics tool, leveraging the capabilities of GPT for comprehensive analysis.`;
 
 export const modelOptions: ModelOptions[] = [
   'gpt-3.5-turbo',

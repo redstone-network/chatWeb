@@ -4,6 +4,7 @@ import { Role } from '@type/chat';
 import { useTranslation } from 'react-i18next';
 import { ChatInterface } from '@type/chat';
 import useSubmit from '@hooks/useSubmit';
+import useAddChat from '@hooks/useAddChat';
 const EditViewButtons = React.memo(
   ({
     sticky = false,
@@ -80,7 +81,8 @@ const EditView = ({
   const currentChatIndex = useStore((state) => state.currentChatIndex);
   const error = useStore((state) => state.error);
   const setError = useStore((state) => state.setError);
-
+  const addChat = useAddChat();
+  const generating = useStore((state) => state.generating);
   const [_content, _setContent] = useState<string>(content);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const textareaRef = React.createRef<HTMLTextAreaElement>();
@@ -231,6 +233,11 @@ const EditView = ({
             </button>
             <button
               type='button'
+              onClick={
+                () => {
+                  if (!generating) { setError(''); addChat() };
+               }
+              }
               className='rounded-lg px-2 inline-flex items-center justify-center border shrink-0 text-center disabled:pointer-events-none bg-white text-xs border-gray-300 text-gray-300 h-6'
             >
               <svg
