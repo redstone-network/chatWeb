@@ -48,7 +48,6 @@ function App() {
           initialiseNewChat();
         }
       } catch (e: unknown) {
-        console.log(e);
         initialiseNewChat();
       }
       localStorage.removeItem('chats');

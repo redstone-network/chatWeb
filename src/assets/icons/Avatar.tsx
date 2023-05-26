@@ -16,7 +16,7 @@ const Icon = () => {
         r='22'
         fill='url(#pattern0)'
         stroke='white'
-        stroke-width='4'
+        strokeWidth='4'
       />
       <defs>
         <pattern

@@ -47,9 +47,9 @@ const Icon = () => {
           y2='53.4179'
           gradientUnits='userSpaceOnUse'
         >
-          <stop offset='0.333138' stop-color='#83F3F9' />
-          <stop offset='0.5092' stop-color='#79C6FD' />
-          <stop offset='0.838159' stop-color='#65EBC9' />
+          <stop offset='0.333138' stopColor='#83F3F9' />
+          <stop offset='0.5092' stopColor='#79C6FD' />
+          <stop offset='0.838159' stopColor='#65EBC9' />
         </linearGradient>
         <linearGradient
           id='paint1_linear_1796_2'
@@ -59,9 +59,9 @@ const Icon = () => {
           y2='53.4179'
           gradientUnits='userSpaceOnUse'
         >
-          <stop offset='0.333138' stop-color='#83F3F9' />
-          <stop offset='0.5092' stop-color='#79C6FD' />
-          <stop offset='0.838159' stop-color='#65EBC9' />
+          <stop offset='0.333138' stopColor='#83F3F9' />
+          <stop offset='0.5092' stopColor='#79C6FD' />
+          <stop offset='0.838159' stopColor='#65EBC9' />
         </linearGradient>
         <linearGradient
           id='paint2_linear_1796_2'
@@ -71,9 +71,9 @@ const Icon = () => {
           y2='53.4179'
           gradientUnits='userSpaceOnUse'
         >
-          <stop offset='0.333138' stop-color='#83F3F9' />
-          <stop offset='0.5092' stop-color='#79C6FD' />
-          <stop offset='0.838159' stop-color='#65EBC9' />
+          <stop offset='0.333138' stopColor='#83F3F9' />
+          <stop offset='0.5092' stopColor='#79C6FD' />
+          <stop offset='0.838159' stopColor='#65EBC9' />
         </linearGradient>
         <linearGradient
           id='paint3_linear_1796_2'
@@ -83,9 +83,9 @@ const Icon = () => {
           y2='53.4179'
           gradientUnits='userSpaceOnUse'
         >
-          <stop offset='0.333138' stop-color='#83F3F9' />
-          <stop offset='0.5092' stop-color='#79C6FD' />
-          <stop offset='0.838159' stop-color='#65EBC9' />
+          <stop offset='0.333138' stopColor='#83F3F9' />
+          <stop offset='0.5092' stopColor='#79C6FD' />
+          <stop offset='0.838159' stopColor='#65EBC9' />
         </linearGradient>
         <linearGradient
           id='paint4_linear_1796_2'
@@ -95,9 +95,9 @@ const Icon = () => {
           y2='53.4179'
           gradientUnits='userSpaceOnUse'
         >
-          <stop offset='0.333138' stop-color='#83F3F9' />
-          <stop offset='0.5092' stop-color='#79C6FD' />
-          <stop offset='0.838159' stop-color='#65EBC9' />
+          <stop offset='0.333138' stopColor='#83F3F9' />
+          <stop offset='0.5092' stopColor='#79C6FD' />
+          <stop offset='0.838159' stopColor='#65EBC9' />
         </linearGradient>
         <linearGradient
           id='paint5_linear_1796_2'
@@ -107,9 +107,9 @@ const Icon = () => {
           y2='53.4179'
           gradientUnits='userSpaceOnUse'
         >
-          <stop offset='0.333138' stop-color='#83F3F9' />
-          <stop offset='0.5092' stop-color='#79C6FD' />
-          <stop offset='0.838159' stop-color='#65EBC9' />
+          <stop offset='0.333138' stopColor='#83F3F9' />
+          <stop offset='0.5092' stopColor='#79C6FD' />
+          <stop offset='0.838159' stopColor='#65EBC9' />
         </linearGradient>
         <linearGradient
           id='paint6_linear_1796_2'
@@ -119,9 +119,9 @@ const Icon = () => {
           y2='53.4179'
           gradientUnits='userSpaceOnUse'
         >
-          <stop offset='0.333138' stop-color='#83F3F9' />
-          <stop offset='0.5092' stop-color='#79C6FD' />
-          <stop offset='0.838159' stop-color='#65EBC9' />
+          <stop offset='0.333138' stopColor='#83F3F9' />
+          <stop offset='0.5092' stopColor='#79C6FD' />
+          <stop offset='0.838159' stopColor='#65EBC9' />
         </linearGradient>
       </defs>
     </svg>

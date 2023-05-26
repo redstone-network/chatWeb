@@ -5,6 +5,7 @@ import { ChatInterface, MessageInterface } from '@type/chat';
 import { getChatCompletion, getData } from '@api/api';
 import { _defaultChatConfig } from '@constants/chat';
 import { officialAPIEndpoint } from '@constants/auth';
+import { parseEventSource } from '@api/helper';
 
 const useSubmit = () => {
   const { t } = useTranslation('api');
@@ -46,14 +47,11 @@ const useSubmit = () => {
   };
 
   const handleSubmit = async (msg?: string) => {
-    console.log('ssss-handleSubmit')
     const chats = useStore.getState().chats;
-    console.log('ssss-handleSubmit', chats, generating)
 
     if (generating || !chats) return;
 
     const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(chats));
-    console.log('ssss-handleSubmit', updatedChats)
 
     updatedChats[currentChatIndex].messages.push({
       role: 'assistant',
@@ -64,29 +62,12 @@ const useSubmit = () => {
     setGenerating(true);
 
     try {
-      // let stream;
+      let stream;
       if (chats[currentChatIndex].messages.length === 0)
         throw new Error('No messages submitted!');
 
 
-      const res = await getData(msg || '')
-      console.log('ssss', res)
-      const updatedChats: ChatInterface[] = JSON.parse(
-        JSON.stringify(useStore.getState().chats)
-      );
-      const updatedMessages = updatedChats[currentChatIndex].messages;
-      if (res.question_type === 'binance_data') { 
-        updatedMessages[updatedMessages.length - 1].content = res.data || [];
-      } else if (res.question_type === 'news') {
-        updatedMessages[updatedMessages.length - 1].content = res.data ? res.data.map((item:any, index: number) => {
-          return `[${index+1}.${item.title}](${item.url})`
-        }).join('\n') : 'No relevant news found'
-      } else {
-        updatedMessages[updatedMessages.length - 1].content += res.data.content;
-      }
-        
-      updatedMessages[updatedMessages.length - 1].question_type = res.question_type;
-      setChats(updatedChats);
+      stream = await getData(msg || '')
       // if (stream) {
       //   if (stream.locked)
       //     throw new Error(
@@ -107,9 +88,9 @@ const useSubmit = () => {
       //     } else {
       //       const resultString = result.reduce((output: string, curr) => {
       //         if (typeof curr === 'string') {
-      //           output += curr;
+      //           partial += curr;
       //         } else {
-      //           const content = curr.data;
+      //           const content = curr.choices[0].delta.content;
       //           if (content) output += content;
       //         }
       //         return output;
@@ -123,15 +104,51 @@ const useSubmit = () => {
       //       setChats(updatedChats);
       //     }
       //   }
-      //   console.log('dddd',partial )
-      //   if (useStore.getState().generating) {
-      //     reader.cancel('Cancelled by user');
-      //   } else {
-      //     reader.cancel('Generation completed');
-      //   }
-      //   reader.releaseLock();
-      //   stream.cancel();
       // }
+      // const updatedChats: ChatInterface[] = JSON.parse(
+      //   JSON.stringify(useStore.getState().chats)
+      // );
+      // const updatedMessages = updatedChats[currentChatIndex].messages;
+      // if (res.question_type === 'binance_data') { 
+      //   updatedMessages[updatedMessages.length - 1].content = res.data || [];
+      // } else if (res.question_type === 'news') {
+      //   updatedMessages[updatedMessages.length - 1].content = res.data ? res.data.map((item:any, index: number) => {
+      //     return `[${index+1}.${item.title}](${item.url})`
+      //   }).join('\n') : 'No relevant news found'
+      // } else {
+      //   updatedMessages[updatedMessages.length - 1].content += res.data.content;
+      // }
+        
+      // updatedMessages[updatedMessages.length - 1].question_type = res.question_type;
+      // setChats(updatedChats);
+      if (stream) {
+        if (stream.locked)
+          throw new Error(
+            'Oops, the stream is locked right now. Please try again'
+          );
+        const reader = stream.getReader();
+        function readStream() {
+          reader.read().then(({ done, value }) => {
+            if (done) {
+              // 读取完成
+              console.log('读取完成');
+              return;
+            }
+    
+            // 处理接收到的数据块
+            const text = new TextDecoder('utf-8').decode(value);
+            console.log(text)
+    
+            // 继续读取下一个数据块
+            readStream();
+          }).catch(error => {
+            console.error('读取流出错:', error);
+          });
+        }
+    
+        // 开始读取流
+        readStream();
+      }
 
       // generate title for new chats
       const currChats = useStore.getState().chats;
@@ -164,14 +181,12 @@ const useSubmit = () => {
       }
     } catch (e: unknown) {
       const err = (e as Error).message;
-      console.log(err);
       setError(err);
       const chats = useStore.getState().chats;
       const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(chats));
       updatedChats[currentChatIndex].messages.pop();
       setChats(updatedChats);
       setGenerating(false);
-
     }
     setGenerating(false);
   };

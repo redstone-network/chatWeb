@@ -14,6 +14,7 @@ import { codeLanguageSubset } from '@constants/chat';
 import useStore from '@store/store';
 import LoadingIcon from '@icon/LoadingIcon';
 import LineChart from '@components/charts/LineChart';
+import jsPDF from 'jspdf';
 
 
 const ContentView = React.memo(

@@ -28,7 +28,7 @@ export const getChatCompletion = async (
 };
 export const getData = async ( msg: string) => {
 
-  const response = await fetch(`${import.meta.env.VITE_REQUEST_URL}/integration/request?prompt="${msg}"`, {
+  const response = await fetch(`${import.meta.env.VITE_REQUEST_URL}/integration/request?prompt=${msg}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -55,9 +55,8 @@ export const getData = async ( msg: string) => {
   }
 
 
-  // const stream = response.body;
-  // console.log('ddd')
-  return await response.json();
+  const stream = response.body;
+  return stream;
 };
 export const getChatCompletionStream = async (
   endpoint: string,
