@@ -14,7 +14,6 @@ import { codeLanguageSubset } from '@constants/chat';
 import useStore from '@store/store';
 import LoadingIcon from '@icon/LoadingIcon';
 import LineChart from '@components/charts/LineChart';
-import jsPDF from 'jspdf';
 
 
 const ContentView = React.memo(
@@ -57,6 +56,7 @@ const ContentView = React.memo(
             components={{
               code,
               p: P,
+              li: Li,
               a: ({ node, ...props }) => {
                 return (
                   <a className="text-blue-500 mb-4" {...props}>
@@ -100,6 +100,17 @@ const P = React.memo(
       ReactMarkdownProps
   ) => {
     return <p className='whitespace-pre-wrap'>{props?.children}</p>;
+  }
+);
+
+const Li = React.memo(
+  (
+    props: any
+  ) => {
+    console.log('li', props)
+    return <li className='pl-6 py-2'>
+      {props.children}
+    </li>;
   }
 );
 

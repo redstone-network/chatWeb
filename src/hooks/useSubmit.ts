@@ -48,6 +48,7 @@ const useSubmit = () => {
 
   const handleSubmit = async (msg?: string) => {
     const chats = useStore.getState().chats;
+    console.log('chats', chats);
 
     if (generating || !chats) return;
 
@@ -62,122 +63,49 @@ const useSubmit = () => {
     setGenerating(true);
 
     try {
-      let stream;
       if (chats[currentChatIndex].messages.length === 0)
         throw new Error('No messages submitted!');
 
-
-      stream = await getData(msg || '')
-      // if (stream) {
-      //   if (stream.locked)
-      //     throw new Error(
-      //       'Oops, the stream is locked right now. Please try again'
-      //     );
-      //   const reader = stream.getReader();
-      //   let reading = true;
-      //   let partial = '';
-      //   while (reading && useStore.getState().generating) {
-      //     const { done, value } = await reader.read();
-      //     const result = parseEventSource(
-      //       partial + new TextDecoder().decode(value)
-      //     );
-      //     partial = '';
-
-      //     if (result === '[DONE]' || done) {
-      //       reading = false;
-      //     } else {
-      //       const resultString = result.reduce((output: string, curr) => {
-      //         if (typeof curr === 'string') {
-      //           partial += curr;
-      //         } else {
-      //           const content = curr.choices[0].delta.content;
-      //           if (content) output += content;
-      //         }
-      //         return output;
-      //       }, '');
-
-      //       const updatedChats: ChatInterface[] = JSON.parse(
-      //         JSON.stringify(useStore.getState().chats)
-      //       );
-      //       const updatedMessages = updatedChats[currentChatIndex].messages;
-      //       updatedMessages[updatedMessages.length - 1].content += resultString;
-      //       setChats(updatedChats);
-      //     }
-      //   }
-      // }
-      // const updatedChats: ChatInterface[] = JSON.parse(
-      //   JSON.stringify(useStore.getState().chats)
-      // );
-      // const updatedMessages = updatedChats[currentChatIndex].messages;
-      // if (res.question_type === 'binance_data') { 
-      //   updatedMessages[updatedMessages.length - 1].content = res.data || [];
-      // } else if (res.question_type === 'news') {
-      //   updatedMessages[updatedMessages.length - 1].content = res.data ? res.data.map((item:any, index: number) => {
-      //     return `[${index+1}.${item.title}](${item.url})`
-      //   }).join('\n') : 'No relevant news found'
-      // } else {
-      //   updatedMessages[updatedMessages.length - 1].content += res.data.content;
-      // }
-        
-      // updatedMessages[updatedMessages.length - 1].question_type = res.question_type;
-      // setChats(updatedChats);
-      if (stream) {
-        if (stream.locked)
-          throw new Error(
-            'Oops, the stream is locked right now. Please try again'
-          );
-        const reader = stream.getReader();
-        function readStream() {
-          reader.read().then(({ done, value }) => {
-            if (done) {
-              // 读取完成
-              console.log('读取完成');
-              return;
-            }
-    
-            // 处理接收到的数据块
-            const text = new TextDecoder('utf-8').decode(value);
-            console.log(text)
-    
-            // 继续读取下一个数据块
-            readStream();
-          }).catch(error => {
-            console.error('读取流出错:', error);
-          });
+      const response = await fetch(
+        `${import.meta.env.VITE_REQUEST_URL}/integration/request?prompt=${msg}`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
         }
-    
-        // 开始读取流
-        readStream();
+      );
+      console.log('response', response);
+      if (!response.ok) {
+        const error = await response.json();
+        console.error(error.error);
+        throw new Error('Request failed');
       }
+      const data = response.body;
+      if (!data) throw new Error('No data');
 
-      // generate title for new chats
-      const currChats = useStore.getState().chats;
-      if (
-        useStore.getState().autoTitle &&
-        currChats &&
-        !currChats[currentChatIndex]?.titleSet
-      ) {
-        const messages_length = currChats[currentChatIndex].messages.length;
-        const assistant_message =
-          currChats[currentChatIndex].messages[messages_length - 1].content;
-        const user_message =
-          currChats[currentChatIndex].messages[messages_length - 2].content;
+      const reader = data.getReader();
+      const decoder = new TextDecoder('utf-8');
+      let done = false;
 
-        const message: MessageInterface = {
-          role: 'user',
-          content: `Generate a title in less than 6 words for the following message:\nUser: ${user_message}\nAssistant: ${assistant_message}`,
-        };
+      while (!done) {
+        const { value, done: readerDone } = await reader.read();
+        if (value) {
+          const updatedChats: ChatInterface[] = JSON.parse(
+            JSON.stringify(useStore.getState().chats)
+          );
+          const updatedMessages = updatedChats[currentChatIndex].messages;
+          const contents = updatedMessages[updatedMessages.length - 1].content;
+          setChats(updatedChats);
+          const char = decoder.decode(value);
+          if (char === '\n' && contents.endsWith('\n')) continue;
 
-        let title = (await generateTitle([message])).trim();
-        if (title.startsWith('"') && title.endsWith('"')) {
-          title = title.slice(1, -1);
+          if (char) {
+            updatedMessages[updatedMessages.length - 1].content += char;
+            setChats(updatedChats);
+          };
         }
-        const updatedChats: ChatInterface[] = JSON.parse(
-          JSON.stringify(useStore.getState().chats)
-        );
-        updatedChats[currentChatIndex].title = title;
-        updatedChats[currentChatIndex].titleSet = true;
-        setChats(updatedChats);
+        done = readerDone;
       }
     } catch (e: unknown) {
       const err = (e as Error).message;
