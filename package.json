@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "server": "nodemon --watch server.js --exec node server.js",
+    "server": "nodemon --watch *.js --exec node server.js",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"

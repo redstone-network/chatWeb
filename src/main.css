@@ -223,7 +223,7 @@
     margin: 0;
   }
 
-  .markdown ul li:before {
+  .markdown ul li.noCheck:before {
     content: '';
     display: inline-block;
     width: 22px;
@@ -231,6 +231,10 @@
     background: url('./assets/marker.svg') no-repeat;
     position: absolute;
     left: 0;
+  }
+  .markdown .hasCheckItem {
+    margin-top: 8px;
+    margin-bottom: 8px;
   }
   .markdown hr {
     border-width: 2px;

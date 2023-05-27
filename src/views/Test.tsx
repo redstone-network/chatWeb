@@ -43,7 +43,7 @@ export default function Test() {
   }, [])
   return (
     <div>
-      <h1>test</h1>
+      <h1 className="my-2">test</h1>
       <MarkdownRenderer markdown={markdown} />
     </div>
   );

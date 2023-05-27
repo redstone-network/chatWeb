@@ -16,9 +16,9 @@ app.get('/api/integration/request', (req, res) => {
   let prompt = req.query?.prompt?.trim();
   if (!prompt) res.status(400).json({ error: 'prompt is required' });
   prompt = prompt.toLowerCase();
+  console.log(prompt)
   const strategy = new QuestionMappingStrategy();
   const response = strategy.getResponse(prompt);
-  console.log(response)
   res.send(response);
 });
 
