@@ -1,4 +1,5 @@
 export interface EventSourceDataInterface {
+  choices: any;
   data: string;
   question_type: string;
 }
