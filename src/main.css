@@ -206,11 +206,11 @@
   }
 
   .markdown ol,
-  .markdown ul {
+  /* .markdown ul {
     display: flex;
     flex-direction: column;
     padding-left: 1rem;
-  }
+  } */
 
   .markdown ol li,
   .markdown ol li > p,
@@ -239,6 +239,11 @@
   .markdown hr {
     border-width: 2px;
     border-color: #EFEFEF;
+  }
+  .markdown .chartBox {
+    width: 600px;
+    margin: 16px auto;
+    border-radius: 10px;
   }
   .dark .bgimage {
     background-image: linear-gradient(
