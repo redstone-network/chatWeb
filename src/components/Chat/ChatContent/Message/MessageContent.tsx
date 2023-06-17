@@ -14,6 +14,7 @@ import { codeLanguageSubset } from '@constants/chat';
 import useStore from '@store/store';
 import LoadingIcon from '@icon/LoadingIcon';
 import LineChart from '@components/charts/LineChart';
+import ChartRenderer from '@components/charts/ChartRenderer';
 
 
 const ContentView = React.memo(
@@ -56,6 +57,7 @@ const ContentView = React.memo(
             components={{
               code,
               p: P,
+              li: Li,
               a: ({ node, ...props }) => {
                 return (
                   <a className="text-blue-500 mb-4" {...props}>
@@ -76,8 +78,15 @@ const ContentView = React.memo(
 
 const code = React.memo((props: CodeProps) => {
   const { inline, className, children } = props;
+  console.log('ss', props)
   const match = /language-(\w+)/.exec(className || '');
   const lang = match && match[1];
+  if (lang === 'chart') {
+    let chartDataString = children[0] as string;
+    chartDataString = chartDataString.replace(/\n$/, '');
+    const chartData = JSON.parse(chartDataString as any);
+    return <ChartRenderer data={chartData}></ChartRenderer>;
+  }
 
   if (inline) {
     return <code className={className}>{children}</code>;
@@ -98,6 +107,22 @@ const P = React.memo(
       ReactMarkdownProps
   ) => {
     return <p className='whitespace-pre-wrap'>{props?.children}</p>;
+  }
+);
+
+const Li = React.memo(
+  (
+    props: any
+  ) => {
+    console.log('li', props)
+    return (
+      props.checked === null ? (<li className='noCheck pl-6 py-2'>
+      {props.children}
+      </li>) : (
+          <li className='pl-2 hasCheckItem bg-gray-100 rounded-lg my-2 py-2'>
+            {props.children}
+          </li>)
+    )
   }
 );
 

@@ -46,7 +46,7 @@ const ChatContent = () => {
       >
         <div className='flex flex-col items-center text-sm dark:bg-gray-800'>
           <div
-            className='flex flex-col items-center text-sm dark:bg-gray-800 md:w-[768px]'
+            className='flex flex-col items-center text-sm dark:bg-gray-800 md:w-[892px]'
             ref={saveRef}
           >
             {messages?.length === 0 && <NewMessageButton messageIndex={-1} />}

@@ -55,9 +55,8 @@ export const getData = async ( msg: string) => {
   }
 
 
-  // const stream = response.body;
-  // console.log('ddd')
-  return await response.json();
+  const stream = response.body;
+  return stream;
 };
 export const getChatCompletionStream = async (
   endpoint: string,

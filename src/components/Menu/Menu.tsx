@@ -3,19 +3,23 @@ import useStore from '@store/store';
 
 import NewChat from './NewChat';
 import ChatHistoryList from './ChatHistoryList';
-import CrossIcon2 from '@icon/CrossIcon2';
+import LogoIcon from '@icon/LogoIcon2';
+import ChatDataInsight from '@src/assets/ChatDataInsight1.png';
 
 const Menu = () => {
-
   return (
     <>
       <div
         id='menu'
-        className={`group/menu dark fixed md:inset-y-0 md:flex md:w-80 md:flex-col transition-transform z-[999] h-full max-md:w-3/4 border-r left-0 top-0 bottom-0 bg-zinc-100`}>
+        className={`fixed md:inset-y-0 md:flex md:w-[360px] md:flex-col transition-transform z-[999] h-full shadow-xl border-r left-0 top-0 bottom-0 bg-white`}
+      >
         <div className='flex h-full min-h-0 flex-col'>
           <div className='scrollbar-trigger flex h-full w-full flex-1 items-start border-white/20'>
             <nav className='flex h-full flex-1 flex-col space-y-1'>
-            <header className="pt-4 h-12 pb-1 flex items-center px-4 justify-between"><a href="/"><span className="font-extrabold inline-block text-transparent bg-clip-text bg-gradient-to-r from-logStart to-logEnd text-xl">ChatData Insight</span></a></header>
+              <header className='flex items-center py-[30px] pl-[30px] border-b-2'>
+                <div className="pr-4"><LogoIcon /></div>
+                <img className="h-7" src={ChatDataInsight} alt="" />
+              </header>
               <ChatHistoryList />
               <NewChat />
             </nav>

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import useStore from '@store/store';
-import i18n from './i18n';
+import i18n from '../i18n';
 
 import Chat from '@components/Chat';
 import Menu from '@components/Menu';
@@ -48,7 +48,6 @@ function App() {
           initialiseNewChat();
         }
       } catch (e: unknown) {
-        console.log(e);
         initialiseNewChat();
       }
       localStorage.removeItem('chats');
