@@ -5,17 +5,9 @@ import {
   createBrowserRouter,
 } from "react-router-dom";
 
-const router = createBrowserRouter([
+const router = createBrowserRouter([ 
   {
-    path: "/home",
-    element: <Home/>
-  },
-  {
-    path: "/test",
-    element: <Test/>
-  }, 
-  {
-    path: "/app",
+    path: "/",
     element: <App/>
   }
 ]);
