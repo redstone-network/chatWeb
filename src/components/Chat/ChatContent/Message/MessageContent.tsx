@@ -13,9 +13,6 @@ import CodeBlock from './CodeBlock';
 import { codeLanguageSubset } from '@constants/chat';
 import useStore from '@store/store';
 import LoadingIcon from '@icon/LoadingIcon';
-import LineChart from '@components/charts/LineChart';
-import ChartRenderer from '@components/charts/ChartRenderer';
-
 
 const ContentView = React.memo(
   ({
