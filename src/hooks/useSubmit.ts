@@ -75,17 +75,8 @@ const useSubmit = () => {
         JSON.stringify(useStore.getState().chats)
       );
       const updatedMessages = updatedChats[currentChatIndex].messages;
-      if (res.question_type === 'binance_data') { 
-        updatedMessages[updatedMessages.length - 1].content = res.data || [];
-      } else if (res.question_type === 'news') {
-        updatedMessages[updatedMessages.length - 1].content = res.data ? res.data.map((item:any, index: number) => {
-          return `[${index+1}.${item.title}](${item.url})`
-        }).join('\n') : 'No relevant news found'
-      } else {
-        updatedMessages[updatedMessages.length - 1].content += res.data.content;
-      }
+      updatedMessages[updatedMessages.length - 1].content += res.content;
         
-      updatedMessages[updatedMessages.length - 1].question_type = res.question_type;
       setChats(updatedChats);
       // if (stream) {
       //   if (stream.locked)

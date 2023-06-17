@@ -36,7 +36,7 @@ const ContentView = React.memo(
     return (
       <>
         <div className='markdown w-full md:max-w-full break-words dark:prose-invert dark share-gpt-message'>
-          {question_type !== 'binance_data' && <ReactMarkdown
+        <ReactMarkdown
             remarkPlugins={[
               remarkGfm,
               [remarkMath, { singleDollarTextMath: false }],
@@ -66,8 +66,7 @@ const ContentView = React.memo(
             }}
           >
             {content}
-          </ReactMarkdown>}
-          {question_type === 'binance_data' && content && <LineChart data={content} />}
+        </ReactMarkdown>
           { content === '' && generating && (messageIndex === messageLength -1) &&<LoadingIcon />}
         </div>
       </>
