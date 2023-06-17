@@ -45,8 +45,8 @@ const Message = React.memo(
           />
         </div>
         {(role === 'user') && (
-          <div className='h-10 w-10 rounded-xl inline-flex items-center justify-center text-2xl ml-2 text-white'>
-            <AvartorIconUser />
+          <div className='h-10 w-10 rounded-full bg-homeMain inline-flex items-center justify-center text-2xl ml-2 text-white'>
+            U
           </div>
         )}
       </div>
