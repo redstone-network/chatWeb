@@ -85,11 +85,12 @@ const useSubmit = () => {
           if (result === '[DONE]' || done) {
             reading = false;
           } else {
-            const resultString = result.reduce((output: string, curr) => {
+            const resultString = result.reduce((output: string, curr: any) => {
+              console.log('curr', curr);
               if (typeof curr === 'string') {
                 output += curr;
               } else {
-                const content = curr.data;
+                const content = curr.content;
                 if (content) output += content;
               }
               return output;
