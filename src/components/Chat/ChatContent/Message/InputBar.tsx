@@ -95,6 +95,8 @@ const EditView = ({
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if ((e.ctrlKey || e.shiftKey) && e.key === 'Enter') {
+      return
+    } else if (e.key === 'Enter') {
       e.preventDefault();
       if (sticky) {
         handleSaveAndSubmit();
