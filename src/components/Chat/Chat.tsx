@@ -3,7 +3,7 @@ import ChatContent from './ChatContent';
 const Chat = () => {
 
   return (
-    <div className={`flex h-full flex-1 flex-col md:pl-[360px]`}>
+    <div className='flex h-full flex-1 flex-col'>
       <main className='relative h-full w-full transition-width flex flex-col overflow-hidden items-stretch flex-1 bg-gray-200'>
         <ChatContent />
       </main>

@@ -67,7 +67,7 @@ function App() {
   }, []);
 
   return (
-    <div className='overflow-hidden w-full h-full relative'>
+    <div className='overflow-hidden w-full h-full relative flex'>
       <Menu />
       <Chat />
     </div>
