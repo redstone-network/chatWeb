@@ -41,12 +41,21 @@ module.exports = {
         gary_new: {
           0: '#F5F5F5',
           1: '#EFEFEF',
+          2: '#000000',
+          3: '#BBB'
         },
         logStart: '#4EBE96',
         logEnd: '#A4DA5E',
         homeMain: '#68ECCD',
         btnStart: '#83F9DD',
         btnEnd: '#79C6FD',
+        sendBtn:'#B1FFEC'
+      },
+      borderRadius: {
+
+      },
+      boxShadow: {
+        'text-area': '0px 1px 7px 2px rgba(0, 0, 0, 0.10)',
       },
       spacing: {
         4.5: '1.125rem',

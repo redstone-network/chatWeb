@@ -4,19 +4,19 @@ import Avatar from '@icon/Avatar';
 const NewChat = () => {
   return (
     <div className='border-t shrink-0 px-4 py-6 relative'>
-      <div className='right-4	bg-gradient-to-tr from-btnStart to-btnEnd text-sm absolute text-white py- text-center rounded py-0.5 px-2'>
+      <div className='right-4	bg-gradient-to-tr text-sm from-btnStart to-btnEnd absolute text-white py- text-center rounded py-0.5 px-2'>
         Free
       </div>
-      <div className='flex text-sm items-center pb-4'>
+      <div className='flex items-center pb-4'>
         <div className='mr-2'>
           <Avatar />
         </div>
         <div>
-          <div className='text-black'>User</div>
-          <div className='text-gray-500	'>0xfw...gw35</div>
+          <div className='text-black text-base'>User</div>
+          <div className='text-gray-500	text-sm'>0xfw...gw35</div>
         </div>
       </div>
-      <div className='font-bold	text-white text-sm flex items-center justify-center rounded-lg	bg-gradient-to-tr from-btnStart to-btnEnd h-8 w-[212px] cursor-pointer mx-auto mb-3'>
+      <div className='font-bold	text-white text-base flex items-center justify-center rounded-lg	bg-gradient-to-tr from-btnStart to-btnEnd h-8 w-[212px] cursor-pointer mx-auto mb-3'>
         Upgrade to Pro
       </div>
       <div className='flex text-sm text-gray-900 items-center'>

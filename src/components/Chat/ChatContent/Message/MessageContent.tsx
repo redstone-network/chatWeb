@@ -33,7 +33,7 @@ const ContentView = React.memo(
     const generating = useStore((state) => state.generating);
     return (
       <>
-        <div className='markdown w-full md:max-w-full break-words dark:prose-invert dark share-gpt-message'>
+        <div className='markdown w-full md:max-w-full break-words'>
         <ReactMarkdown
             remarkPlugins={[
               remarkGfm,
