@@ -6,10 +6,21 @@ const QUESTION4 = `Provide me with the most active DApps on the Ethereum blockch
 
 const ANSWER1 = `
 In the past week, we've identified three notable project airdrops, namely:
-* [ ] **Starknet**  \n **Starknet** is set to revolutionize layer 2 solutions on Ethereum.
-* [ ] **ZkSync**  \n **ZkSync** is pioneering zkRollups for scalability.
-* [ ] **LayerZero**  \n **LayerZero** is creating a cross-chain interoperability protocol.   \n There are few crucial steps to follow:  \n1.Visit the official LayerZero website at www.layerzero.com.  \n2.Create a unique blockchain address through a trusted browser plug-in wallet or a secure script.  \n3.Engage with the LayerZero community by completing at least three transfers and acquiring an NFT from their ecosystem.   \n4.Ensure all these operations are completed before August 30th to be eligible for the snapshot and ultimately, the airdrop.
+
+* [ ] **Starknet**  
+  **Starknet** is set to revolutionize layer 2 solutions on Ethereum.
+* [ ] **ZkSync**  
+  **ZkSync** is pioneering zkRollups for scalability.
+* [ ] **LayerZero**  
+  **LayerZero** is creating a cross-chain interoperability protocol.
+
+There are a few crucial steps to follow:
+1. Visit the official LayerZero website at www.layerzero.com.
+2. Create a unique blockchain address through a trusted browser plug-in wallet or a secure script.
+3. Engage with the LayerZero community by completing at least three transfers and acquiring an NFT from their ecosystem.
+4. Ensure all these operations are completed before August 30th to be eligible for the snapshot and ultimately, the airdrop.
 `;
+
 
 const ANSWER2 = `
 * Extremely cheap fees: (<$0.05)and fast transaction finality when compared to other leading amart contract platforms

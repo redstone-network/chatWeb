@@ -32,6 +32,7 @@ const ContentView = React.memo(
     messageIndex: number;
   }) => {
     const generating = useStore((state) => state.generating);
+    
     return (
       <>
         <div className='markdown w-full md:max-w-full break-words'>

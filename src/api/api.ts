@@ -55,8 +55,8 @@ export const getData = async ( msg: string) => {
   }
 
 
-  const stream = response.body;
-  return stream;
+  // const stream = response.body;
+  return response;
 };
 export const getChatCompletionStream = async (
   endpoint: string,
