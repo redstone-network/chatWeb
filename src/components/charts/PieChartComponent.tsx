@@ -9,11 +9,11 @@ const data = [
 ];
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
-const LineChartComponent = () => {
+const LineChartComponent = ({total, title}:any) => {
   return (
     <>
-    <div className="text-lg text-black font-bold	mb-2">Total Issuance</div>
-      <div className="text-3xl font-bold text-primary mb-3">1.332 B</div>
+      <div className="text-lg text-black font-bold	mb-2 font-sans">{ title }</div>
+      <div className="text-3xl font-bold text-primary mb-3 font-sans">{total }</div>
     <div style={{ width: '100%', height: 140 }}>
       
       <ResponsiveContainer>

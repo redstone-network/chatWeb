@@ -3,6 +3,7 @@
 import React from 'react';
 import LineChartComponent from './LineChartComponent';
 import PieChartComponent from './PieChartComponent';
+import CardList from './CardList';
 
 const colMap = {
   12: 'col-span-12',
@@ -19,7 +20,7 @@ const ChartRenderer = ({ data }) => {
   console.log(data);
   const { subtitle, desc, charts } = data;
   return (
-    <div className='rounded-[10px] mt-2 p-4 mb-8 text-lg text-black'>
+    <div className='rounded-[10px] mt-2 p-4 first:mb-2  font-sans text-lg text-black'>
       {desc && (
         <div className='pb-4.5 break-words whitespace-normal	'>{desc}</div>
       )}
@@ -37,14 +38,17 @@ const ChartRenderer = ({ data }) => {
                     } bg-white sss rounded-lg py-2 mb-2`}
                   >
                     {chart.type === 'line' && (
-                      <LineChartComponent data={chart.data} />
+                      <LineChartComponent data={chart.data}  title={chart.title}/>
                     )}
                     {
                       chart.type === 'none' && null
                     }
                     {chart.type === 'pie' && (
-                      <PieChartComponent data={chart.data} />
+                      <PieChartComponent data={chart.data} title={chart.title} total={ chart.total } />
                     )}
+                    {
+                      chart.type === 'cardList' && (<CardList data={ chart.data } title={chart.title} />)
+                    }
                   </div>
                 );
               })}

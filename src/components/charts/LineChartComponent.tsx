@@ -56,11 +56,13 @@ const data = [
   },
 ];
 
-const LineChartComponent = () => {
+const LineChartComponent = ({total, title}:any) => {
   return (
     <>
-            <div className='text-lg text-black font-bold	mb-2'>Chain Status</div>
-      <div className='text-3xl font-bold text-primary mb-3'>
+      <div className='text-lg text-black font-bold	mb-2 font-sans'>
+        {title}
+      </div>
+      <div className='text-3xl font-bold text-primary mb-3 font-sans'>
         <svg
           width='66'
           height='22'
@@ -84,33 +86,32 @@ const LineChartComponent = () => {
           <rect x='1' y='1' width='64' height='20' rx='4' stroke='#74E3C8' />
         </svg>
       </div>
-    <div style={{ width: '100%', height: 140 }}>
-
-      <ResponsiveContainer>
-        <AreaChart
-          data={data}
-          margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
-        >
-          <defs>
-            <linearGradient id='colorPv' x1='0' y1='0' x2='0' y2='1'>
-              <stop offset='5%' stopColor='#79C6FD' stopOpacity={0.8} />
-              <stop offset='95%' stopColor='#79C6FD' stopOpacity={0} />
-            </linearGradient>
-          </defs>
-          <XAxis dataKey='name' />
-          <YAxis />
-          <CartesianGrid strokeDasharray='3 3' />
-          <Area
-            type='monotone'
-            dataKey='pv'
-            stroke='#79C6FD'
-            fillOpacity={1}
-            fill='url(#colorPv)'
-          />
-        </AreaChart>
-      </ResponsiveContainer>
+      <div style={{ width: '100%', height: 140 }}>
+        <ResponsiveContainer>
+          <AreaChart
+            data={data}
+            margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+          >
+            <defs>
+              <linearGradient id='colorPv' x1='0' y1='0' x2='0' y2='1'>
+                <stop offset='5%' stopColor='#79C6FD' stopOpacity={0.8} />
+                <stop offset='95%' stopColor='#79C6FD' stopOpacity={0} />
+              </linearGradient>
+            </defs>
+            <XAxis dataKey='name' />
+            <YAxis />
+            <CartesianGrid strokeDasharray='3 3' />
+            <Area
+              type='monotone'
+              dataKey='pv'
+              stroke='#79C6FD'
+              fillOpacity={1}
+              fill='url(#colorPv)'
+            />
+          </AreaChart>
+        </ResponsiveContainer>
       </div>
-      </>
+    </>
   );
 };
 

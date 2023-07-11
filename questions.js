@@ -45,6 +45,7 @@ const a2 = `
       [
         {
           "type": "line",
+          "title": "Chain Status",
           "col": 6,
           "data": [
             {
@@ -94,6 +95,8 @@ const a2 = `
         {
             "type": "pie",
             "col": 5,
+            "title": "Total Issuance",
+            "total": "1.332 B",
             "data": [
               {
                 "x": "2021-01-01",
@@ -132,105 +135,43 @@ const a2 = `
               }
             ]
           }
-      ]
-    ]
-  }
-  \`\`\`
-
-  Axie Infinity has experienced a drop in engagement, with daily active users falling from a peak of 2.7 million to less than a million as of May 9th, 2023​​. Despite the decrease in players, Axie Infinity maintained a significant 24-hour trading volume of $62,050,627, showcasing the game's enduring appeal and potential for recovery​​.
-  \`\`\`chart
-  {
-    "charts": [
+      ],
       [
         {
-          "type": "line",
-          "col": 6,
+          "type": "cardList",
+          "col": 12,
+          "title": "Chain Data",
           "data": [
-            {
-              "x": "2021-01-01",
-              "inflow": 100000,
-              "outflow": 50000
-            },
-            {
-              "x": "2021-02-01",
-              "inflow": 200000,
-              "outflow": 100000
-            },
-            {
-              "x": "2021-03-01",
-              "inflow": 300000,
-              "outflow": 200000
-            },
-            {
-              "x": "2021-04-01",
-              "inflow": 400000,
-              "outflow": 300000
-            },
-            {
-              "x": "2021-05-01",
-              "inflow": 500000,
-              "outflow": 400000
-            },
-            {
-              "x": "2021-06-01",
-              "inflow": 600000,
-              "outflow": 500000
-            },
-            {
-              "x": "2021-07-01",
-              "inflow": 700000,
-              "outflow": 600000
-            }
-          ]
-        },
-        {
-          "type": "none",
-          "col": 1,
-          "data": [
-            
-          ]
-        },
-        {
-            "type": "pie",
-            "col": 5,
-            "data": [
+            [
               {
-                "x": "2021-01-01",
-                "inflow": 100000,
-                "outflow": 50000
+                "title": "Finalized Blocks",
+                "value": "16,324,880"
               },
               {
-                "x": "2021-02-01",
-                "inflow": 200000,
-                "outflow": 100000
+                "title": "Signed Extrinsics",
+                "value": "13,053,094"
               },
               {
-                "x": "2021-03-01",
-                "inflow": 300000,
-                "outflow": 200000
+                "title": "Staked / Bonded",
+                "value": "580.344 M / 609.312 M"
+              }
+            ],
+            [
+              {
+                "title": "Holders",
+                "value": "1,125,358"
               },
               {
-                "x": "2021-04-01",
-                "inflow": 400000,
-                "outflow": 300000
+                "title": "Transfers",
+                "value": "11,172,869"
               },
               {
-                "x": "2021-05-01",
-                "inflow": 500000,
-                "outflow": 400000
-              },
-              {
-                "x": "2021-06-01",
-                "inflow": 600000,
-                "outflow": 500000
-              },
-              {
-                "x": "2021-07-01",
-                "inflow": 700000,
-                "outflow": 600000
+                "title": "Inflation Rate",
+                "value": "6.86%"
               }
             ]
-          }
+          ]
+        }
       ]
     ]
   }
