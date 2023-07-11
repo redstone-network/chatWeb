@@ -23,12 +23,12 @@ const Message = React.memo(
 
     return (
       <div
-        className={`w-full text-gary_new-2 flex py-3.5 ${
-          role === 'user' ? 'justify-end' : 'justify-start'
+        className={`w-full text-gary_new-2  flex py-3.5 ${
+          role === 'user' ? 'justify-end' : 'justify-start message-line'
         } `}
       >
         {!(role === 'user') && (
-          <div className='h-8 w-8 inline-flex items-center justify-center text-base mr-2.5'>
+          <div className='h-8 w-8 inline-flex items-center avartor justify-center text-base mr-2.5'>
             <AvartorIcon />
           </div>
         )}
@@ -45,7 +45,7 @@ const Message = React.memo(
           />
         </div>
         {(role === 'user') && (
-          <div className='ml-2'>
+          <div className='ml-2 avartor'>
             <AvartorIconUser />
           </div>
         )}

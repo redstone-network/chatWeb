@@ -14,23 +14,15 @@ const colMap = {
 };
 const ChartRenderer = ({ data }) => {
   console.log(data);
-  const { subtitle, title, charts } = data;
+  const { subtitle, desc, charts } = data;
   return (
-    <div className='rounded-lg mt-4 p-4 text-black bg-gray-200'>
-      {title && (
-        <div>
-          {title.map((t, i) => (
-            <div
-              key={i}
-              className='text-2xl font-sans
-          font-bold'
-            >
-              {t}
-            </div>
-          ))}
+    <div className='rounded-[10px] mt-4 p-4 text-lg text-black bg-gary_new-0'>
+      {desc && (
+        <div className="pb-4.5 break-words whitespace-normal	">
+          {desc}
         </div>
       )}
-      {subtitle && <div className='808 pb-4'>{subtitle}</div>}
+      
       {charts && (
         <div className='grid grid-cols-12'>
           {charts.map((chart, j) => {
@@ -40,7 +32,9 @@ const ChartRenderer = ({ data }) => {
                   colMap[(chart.col as keyof colMap) || 12]
                 } bg-white rounded-lg py-2 mb-2`}
               >
-                {chart.type === 'line' && <LineChartComponent data={chart.data} />}
+                {chart.type === 'line' && (
+                  <LineChartComponent data={chart.data} />
+                )}
                 {chart.type === 'lineBar' && <LineBar data={chart.data} />}
               </div>
             );

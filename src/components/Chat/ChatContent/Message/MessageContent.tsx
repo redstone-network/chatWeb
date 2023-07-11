@@ -114,7 +114,7 @@ const Li = React.memo(
     props: any
   ) => {
     return (
-      props.checked === null ? (<li className='noCheck pl-6 py-2'>
+      props.checked === null ? (<li className='noCheck pl-10 py-2'>
       {props.children}
       </li>) : (
           <li className='pl-2 hasCheckItem bg-gray-100 rounded-lg my-2 py-2'>

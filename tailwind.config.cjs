@@ -42,7 +42,8 @@ module.exports = {
           0: '#F5F5F5',
           1: '#EFEFEF',
           2: '#000000',
-          3: '#BBB'
+          3: '#BBB',
+          4: '#9098A0'
         },
         logStart: '#4EBE96',
         logEnd: '#A4DA5E',

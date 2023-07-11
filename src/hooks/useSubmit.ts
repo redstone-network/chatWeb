@@ -7,6 +7,7 @@ import { _defaultChatConfig } from '@constants/chat';
 import { parseEventSource } from '@api/helper';
 
 const useSubmit = () => {
+  
   const { t } = useTranslation('api');
   const error = useStore((state) => state.error);
   const setError = useStore((state) => state.setError);
@@ -14,7 +15,14 @@ const useSubmit = () => {
   const generating = useStore((state) => state.generating);
   const currentChatIndex = useStore((state) => state.currentChatIndex);
   const setChats = useStore((state) => state.setChats);
-
+  function isArrStringMatch(str: string) {
+    try {
+      const arr = JSON.parse(str);
+      return Array.isArray(arr);
+    } catch (error) {
+      return false;
+    }
+  }
   const handleSubmit = async (msg: string) => {
     const chats = useStore.getState().chats;
     if (generating || !chats) return;
@@ -81,12 +89,36 @@ const useSubmit = () => {
       // }
       const response = await getData(msg);
       const resultString = await response.text();
-      const updatedChats: ChatInterface[] = JSON.parse(
-        JSON.stringify(useStore.getState().chats)
-      );
-      const updatedMessages = updatedChats[currentChatIndex].messages;
-      updatedMessages[updatedMessages.length - 1].content += resultString;
-      setChats(updatedChats);
+      
+      if (isArrStringMatch(resultString)) {
+        const arr = JSON.parse(resultString);
+        console.log('resultString', arr)
+
+        for (let i = 0; i < arr.length; i++) { 
+          const updatedChats: ChatInterface[] = JSON.parse(
+            JSON.stringify(useStore.getState().chats)
+          );
+          const updatedMessages = updatedChats[currentChatIndex].messages;
+          if (i === 0) { 
+            updatedMessages[updatedMessages.length - 1].content += arr[i];
+            await setChats(updatedChats);
+          } else {
+            updatedChats[currentChatIndex].messages.push({
+              role: 'assistant',
+              content: arr[i],
+            });
+            await setChats(updatedChats);
+          }
+        }
+      } else {
+        const updatedChats: ChatInterface[] = JSON.parse(
+          JSON.stringify(useStore.getState().chats)
+        );
+        const updatedMessages = updatedChats[currentChatIndex].messages;
+        updatedMessages[updatedMessages.length - 1].content += resultString;
+        setChats(updatedChats);
+      }
+      
     } catch (e: unknown) {
       const err = (e as Error).message;
       setError(err);
