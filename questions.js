@@ -41,17 +41,11 @@ const a2 = `
   Axie Infinity has experienced a drop in engagement, with daily active users falling from a peak of 2.7 million to less than a million as of May 9th, 2023​​. Despite the decrease in players, Axie Infinity maintained a significant 24-hour trading volume of $62,050,627, showcasing the game's enduring appeal and potential for recovery​​.
   \`\`\`chart
   {
-    "title": ["Uniswap"],
-    "subtitle": "Insights into the project",
     "charts": [
-      {
-        "type": "lineBar",
-        "col": 12,
-        "data": 15000
-      },
-      {
+      [
+        {
           "type": "line",
-          "col": 12,
+          "col": 6,
           "data": [
             {
               "x": "2021-01-01",
@@ -89,7 +83,155 @@ const a2 = `
               "outflow": 600000
             }
           ]
-        }
+        },
+        {
+          "type": "none",
+          "col": 1,
+          "data": [
+            
+          ]
+        },
+        {
+            "type": "pie",
+            "col": 5,
+            "data": [
+              {
+                "x": "2021-01-01",
+                "inflow": 100000,
+                "outflow": 50000
+              },
+              {
+                "x": "2021-02-01",
+                "inflow": 200000,
+                "outflow": 100000
+              },
+              {
+                "x": "2021-03-01",
+                "inflow": 300000,
+                "outflow": 200000
+              },
+              {
+                "x": "2021-04-01",
+                "inflow": 400000,
+                "outflow": 300000
+              },
+              {
+                "x": "2021-05-01",
+                "inflow": 500000,
+                "outflow": 400000
+              },
+              {
+                "x": "2021-06-01",
+                "inflow": 600000,
+                "outflow": 500000
+              },
+              {
+                "x": "2021-07-01",
+                "inflow": 700000,
+                "outflow": 600000
+              }
+            ]
+          }
+      ]
+    ]
+  }
+  \`\`\`
+
+  Axie Infinity has experienced a drop in engagement, with daily active users falling from a peak of 2.7 million to less than a million as of May 9th, 2023​​. Despite the decrease in players, Axie Infinity maintained a significant 24-hour trading volume of $62,050,627, showcasing the game's enduring appeal and potential for recovery​​.
+  \`\`\`chart
+  {
+    "charts": [
+      [
+        {
+          "type": "line",
+          "col": 6,
+          "data": [
+            {
+              "x": "2021-01-01",
+              "inflow": 100000,
+              "outflow": 50000
+            },
+            {
+              "x": "2021-02-01",
+              "inflow": 200000,
+              "outflow": 100000
+            },
+            {
+              "x": "2021-03-01",
+              "inflow": 300000,
+              "outflow": 200000
+            },
+            {
+              "x": "2021-04-01",
+              "inflow": 400000,
+              "outflow": 300000
+            },
+            {
+              "x": "2021-05-01",
+              "inflow": 500000,
+              "outflow": 400000
+            },
+            {
+              "x": "2021-06-01",
+              "inflow": 600000,
+              "outflow": 500000
+            },
+            {
+              "x": "2021-07-01",
+              "inflow": 700000,
+              "outflow": 600000
+            }
+          ]
+        },
+        {
+          "type": "none",
+          "col": 1,
+          "data": [
+            
+          ]
+        },
+        {
+            "type": "pie",
+            "col": 5,
+            "data": [
+              {
+                "x": "2021-01-01",
+                "inflow": 100000,
+                "outflow": 50000
+              },
+              {
+                "x": "2021-02-01",
+                "inflow": 200000,
+                "outflow": 100000
+              },
+              {
+                "x": "2021-03-01",
+                "inflow": 300000,
+                "outflow": 200000
+              },
+              {
+                "x": "2021-04-01",
+                "inflow": 400000,
+                "outflow": 300000
+              },
+              {
+                "x": "2021-05-01",
+                "inflow": 500000,
+                "outflow": 400000
+              },
+              {
+                "x": "2021-06-01",
+                "inflow": 600000,
+                "outflow": 500000
+              },
+              {
+                "x": "2021-07-01",
+                "inflow": 700000,
+                "outflow": 600000
+              }
+            ]
+          }
+      ]
     ]
   }
   \`\`\`

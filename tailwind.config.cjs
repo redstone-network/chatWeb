@@ -12,6 +12,7 @@ module.exports = {
       base: ['14px', '16px'],
       lg: ['16px', '20px'],
       xl: ['18px', '24px'],
+      '3xl': ['32px', '38px']
     },
     extend: {
       typography: {
@@ -45,6 +46,7 @@ module.exports = {
           3: '#BBB',
           4: '#9098A0'
         },
+        primary: '#5FD1B2',
         logStart: '#4EBE96',
         logEnd: '#A4DA5E',
         homeMain: '#68ECCD',
