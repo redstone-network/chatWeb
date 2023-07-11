@@ -1,55 +1,23 @@
 import React from 'react';
 import useStore from '@store/store';
 import { useTranslation } from 'react-i18next';
-import { ChatInterface, MessageInterface } from '@type/chat';
-import { getChatCompletion, getData } from '@api/api';
+import { ChatInterface } from '@type/chat';
+import {  getData } from '@api/api';
 import { _defaultChatConfig } from '@constants/chat';
-import { officialAPIEndpoint } from '@constants/auth';
 import { parseEventSource } from '@api/helper';
 
 const useSubmit = () => {
   const { t } = useTranslation('api');
   const error = useStore((state) => state.error);
   const setError = useStore((state) => state.setError);
-  const apiEndpoint = useStore((state) => state.apiEndpoint);
-  const apiKey = useStore((state) => state.apiKey);
   const setGenerating = useStore((state) => state.setGenerating);
   const generating = useStore((state) => state.generating);
   const currentChatIndex = useStore((state) => state.currentChatIndex);
   const setChats = useStore((state) => state.setChats);
 
-  const generateTitle = async (
-    message: MessageInterface[]
-  ): Promise<string> => {
-    let data;
-    if (!apiKey || apiKey.length === 0) {
-      // official endpoint
-      if (apiEndpoint === officialAPIEndpoint) {
-        throw new Error(t('noApiKeyWarning') as string);
-      }
-
-      // other endpoints
-      data = await getChatCompletion(
-        useStore.getState().apiEndpoint,
-        message,
-        _defaultChatConfig
-      );
-    } else if (apiKey) {
-      // own apikey
-      data = await getChatCompletion(
-        useStore.getState().apiEndpoint,
-        message,
-        _defaultChatConfig,
-        apiKey
-      );
-    }
-    return data.choices[0].message.content;
-  };
 
   const handleSubmit = async (msg: string) => {
     const chats = useStore.getState().chats;
-    console.log('chats', chats);
-
     if (generating || !chats) return;
 
     const updatedChats: ChatInterface[] = JSON.parse(JSON.stringify(chats));
