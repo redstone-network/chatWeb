@@ -12,7 +12,7 @@ class QuestionMappingStrategy {
   }
 }
 
-app.get('/api/integration/request', (req, res) => {
+app.get('/api/v1/insight', (req, res) => {
   let prompt = req.query?.prompt?.trim();
   if (!prompt) res.status(400).json({ error: 'prompt is required' });
   prompt = prompt.toLowerCase();
