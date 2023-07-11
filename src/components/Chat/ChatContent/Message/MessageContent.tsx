@@ -13,6 +13,7 @@ import CodeBlock from './CodeBlock';
 import { codeLanguageSubset } from '@constants/chat';
 import useStore from '@store/store';
 import LoadingIcon from '@icon/LoadingIcon';
+import ChartRenderer from '@components/charts/ChartRenderer';
 
 const ContentView = React.memo(
   ({
@@ -75,8 +76,15 @@ const ContentView = React.memo(
 
 const code = React.memo((props: CodeProps) => {
   const { inline, className, children } = props;
+  console.log('ss', props)
   const match = /language-(\w+)/.exec(className || '');
   const lang = match && match[1];
+  if (lang === 'chart') {
+    let chartDataString = children[0] as string;
+    chartDataString = chartDataString.replace(/\n$/, '');
+    const chartData = JSON.parse(chartDataString as any);
+    return <ChartRenderer data={chartData}></ChartRenderer>;
+  }
 
   if (inline) {
     return <code className={className}>{children}</code>;
