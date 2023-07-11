@@ -8,6 +8,7 @@ const port = 3000;
 class QuestionMappingStrategy {
   getResponse(prompt) {
     const mappedQuestion = prompt.endsWith('?') || prompt.endsWith('.') ? prompt.slice(0, -1) : prompt;
+    console.log(questionMapping)
     return questionMapping[mappedQuestion] || DEFAULT_ANSWER;
   }
 }
