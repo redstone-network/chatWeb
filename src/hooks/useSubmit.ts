@@ -110,7 +110,7 @@ const useSubmit = () => {
         const updatedChats: ChatInterface[] = JSON.parse(
           JSON.stringify(useStore.getState().chats)
         );
-        const chunkSize = Math.ceil(resultString.length / 20);
+        const chunkSize = Math.ceil(resultString.length / 2);
         const chunks = [];
         for (let i = 0; i < resultString.length; i += chunkSize) {
           chunks.push(resultString.slice(i, i + chunkSize));
