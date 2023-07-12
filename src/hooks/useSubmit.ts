@@ -46,24 +46,66 @@ const useSubmit = () => {
 
       if (isArrStringMatch(resultString)) {
         const arr = JSON.parse(resultString);
-        console.log('resultString', arr);
-
-        for (let i = 0; i < arr.length; i++) {
-          const updatedChats: ChatInterface[] = JSON.parse(
-            JSON.stringify(useStore.getState().chats)
-          );
-          const updatedMessages = updatedChats[currentChatIndex].messages;
-          if (i === 0) {
-            updatedMessages[updatedMessages.length - 1].content += arr[i];
-            await setChats(updatedChats);
-          } else {
-            updatedChats[currentChatIndex].messages.push({
-              role: 'assistant',
-              content: arr[i],
-            });
-            await setChats(updatedChats);
+        const renderArray = async (arrIndex: number) => {
+          if (arrIndex >= arr.length) {
+            setGenerating(false);
+            return;
           }
-        }
+  
+          const chunkSize = Math.ceil(arr[arrIndex].length / 20);
+          const chunks = [];
+          for (let i = 0; i < arr[arrIndex].length; i += chunkSize) {
+            chunks.push(arr[arrIndex].slice(i, i + chunkSize));
+          }
+  
+          const renderChunk = async (chunkIndex: number) => {
+            if (chunkIndex >= chunks.length) {
+              if (arrIndex < arr.length - 1) {
+                const updatedChats: ChatInterface[] = JSON.parse(
+                  JSON.stringify(useStore.getState().chats)
+                );
+                updatedChats[currentChatIndex].messages.push({
+                  role: 'assistant',
+                  content: '',
+                });
+                await setChats(updatedChats);
+              }
+              renderArray(arrIndex + 1);
+              return;
+            }
+  
+            const updatedChats: ChatInterface[] = JSON.parse(
+              JSON.stringify(useStore.getState().chats)
+            );
+            const updatedMessages = updatedChats[currentChatIndex].messages;
+  
+            // 等待整个代码片段
+            if (chunks[chunkIndex].includes('```')) {
+              const endIndex = chunks.findIndex((c, idx) =>
+                idx > chunkIndex && c.includes('```')
+              );
+              if (endIndex !== -1) {
+                updatedMessages[updatedMessages.length - 1].content += chunks
+                  .slice(chunkIndex, endIndex + 1)
+                  .join('');
+                await setChats(updatedChats);
+                chunkIndex = endIndex;
+              }
+            } else {
+              updatedMessages[updatedMessages.length - 1].content +=
+                chunks[chunkIndex];
+              await setChats(updatedChats);
+            }
+  
+            setTimeout(() => {
+              renderChunk(chunkIndex + 1);
+            }, 200); // 可以根据需要调整延时
+          };
+  
+          renderChunk(0);
+        };
+  
+        renderArray(0);
       } else {
         const updatedChats: ChatInterface[] = JSON.parse(
           JSON.stringify(useStore.getState().chats)
@@ -89,7 +131,7 @@ const useSubmit = () => {
 
           setTimeout(() => {
             renderChunk(index + 1);
-          }, 100); // 可以根据需要调整延时
+          }, 200); // 可以根据需要调整延时
         };
         renderChunk(0);
         // const updatedMessages = updatedChats[currentChatIndex].messages;
