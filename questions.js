@@ -14,7 +14,20 @@ const QUESTION2 = `Could you provide me with the most active DApps on the Polkad
 const QUESTION3 = `what is our current strategy considering the Bitcoin market trend, and how do we adjust it for short and ultra-short-term trading`.toLowerCase();
 const QUESTION4 = `What insights and investment strategies can be gleaned from the correlation between the ETH price and its inflow and outflow on the Binance exchange`.toLowerCase();
 const ANSWER1 = `
-![img](https://img1.imgtp.com/2023/07/12/ZnZRLHem.svg)
+In the past week, we've identified three notable project airdrops, namely:
+
+* [ ] **Starknet**  
+  **Starknet** is set to revolutionize layer 2 solutions on Ethereum.
+* [ ] **ZkSync**  
+  **ZkSync** is pioneering zkRollups for scalability.
+* [ ] **LayerZero**  
+  **LayerZero** is creating a cross-chain interoperability protocol.
+  
+There are a few crucial steps to follow:
+1. Visit the official LayerZero website at www.layerzero.com.
+2. Create a unique blockchain address through a trusted browser plug-in wallet or a secure script.
+3. Engage with the LayerZero community by completing at least three transfers and acquiring an NFT from their ecosystem.
+4. Ensure all these operations are completed before August 30th to be eligible for the snapshot and ultimately, the airdrop.
 `;
 
 const ANSWER23 = `
