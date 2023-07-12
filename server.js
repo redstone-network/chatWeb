@@ -11,10 +11,10 @@ class QuestionMappingStrategy {
     return questionMapping[mappedQuestion] || DEFAULT_ANSWER;
   }
 }
-
+console.log('sss')
 app.get('/api/v1/insight', (req, res) => {
   let prompt = req.query?.prompt?.trim();
-  if (!prompt) res.status(400).json({ error: 'prompt is required' });
+  if (!prompt) { return res.status(400).json({ error: 'prompt is required' }) };
   prompt = prompt.toLowerCase();
   const strategy = new QuestionMappingStrategy();
   const response = strategy.getResponse(prompt);

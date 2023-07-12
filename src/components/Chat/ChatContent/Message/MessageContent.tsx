@@ -105,7 +105,7 @@ const P = React.memo(
     > &
       ReactMarkdownProps
   ) => {
-    return <p className='whitespace-pre-wrap'>{props?.children}</p>;
+    return <p className='whitespace-pre-wrap py-2'>{props?.children}</p>;
   }
 );
 

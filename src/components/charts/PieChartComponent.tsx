@@ -1,15 +1,9 @@
 import React, { PureComponent } from 'react';
 import { PieChart, Pie, Legend, Cell, ResponsiveContainer } from 'recharts';
 
-const data = [
-  { name: 'Group A', value: 400 },
-  { name: 'Group B', value: 300 },
-  { name: 'Group C', value: 300 },
-  { name: 'Group D', value: 200 },
-];
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
-const LineChartComponent = ({total, title}:any) => {
+const LineChartComponent = ({data, total, title}:any) => {
   return (
     <>
       <div className="text-lg text-black font-bold	mb-2 font-sans">{ title }</div>
@@ -22,8 +16,8 @@ const LineChartComponent = ({total, title}:any) => {
             data={data}
             cx="30%"
             cy="50%"
-            innerRadius={50}
-            outerRadius={60}
+            innerRadius={40}
+            outerRadius={50}
             fill='#8884d8'
             paddingAngle={5}
             dataKey='value'

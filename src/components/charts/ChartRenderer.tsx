@@ -20,7 +20,7 @@ const ChartRenderer = ({ data }) => {
   console.log(data);
   const { subtitle, desc, charts } = data;
   return (
-    <div className='rounded-[10px] mt-2 p-4 first:mb-2  font-sans text-lg text-black'>
+    <div className='rounded-[10px] min-w-[720px] mt-2 p-4 first:mb-2  font-sans text-lg text-black'>
       {desc && (
         <div className='pb-4.5 break-words whitespace-normal	'>{desc}</div>
       )}

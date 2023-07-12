@@ -33,7 +33,7 @@ const Message = React.memo(
           </div>
         )}
         <div
-          className='text-base	flex transition-all max-w-[84%] flex-col ease-in-out p-6 w-fit bg-white rounded-[10px]'
+          className='text-base	flex transition-all max-w-[84%] flex-col ease-in-out px-4 py-2 w-fit bg-white rounded-[10px]'
         >
           <MessageContent
             role={role}

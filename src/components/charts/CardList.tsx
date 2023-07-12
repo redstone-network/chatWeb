@@ -10,12 +10,12 @@ const LineBar = ({ data, title }: any) => {
               <div className='flex first:mb-6'>
                 {row.map((item: any, i: any) => {
                   return (
-                    <div className='mr-10'>
+                    <div className='mr-10 min-w-[100px]'>
                       <div className='text-base text-black mb-2 font-sans'>
-                        Finalized Blocks
+                        {item.title}
                       </div>
                       <div className='text-lg text-primary font-sans'>
-                        16,324,880
+                        {item.value}
                       </div>
                     </div>
                   );

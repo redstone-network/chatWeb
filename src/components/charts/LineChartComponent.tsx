@@ -1,67 +1,73 @@
 // LineChartComponent.js
-import React from 'react';
-import {
-  AreaChart,
-  Area,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  linearGradient,
-  Tooltip,
-  ResponsiveContainer,
-} from 'recharts';
+import React, { useEffect, useRef } from 'react';
+import * as echarts from 'echarts';
+import { EChartsOption } from 'echarts';
 
-const data = [
-  {
-    name: 'Page A',
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: 'Page B',
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: 'Page C',
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: 'Page D',
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: 'Page E',
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: 'Page F',
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: 'Page G',
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
+const AreaChart: React.FC = ({data}) => {
+  const chartRef = useRef<HTMLDivElement>(null);
 
-const LineChartComponent = ({total, title}:any) => {
+  useEffect(() => {
+    // 创建图表实例
+    const chart = echarts.init(chartRef.current!);
+    const x = data.map((item: any) => item.X);
+    const y = data.map((item: any) => item.Y);
+    // 定义图表配置项
+    const options: EChartsOption = {
+      xAxis: {
+        type: 'category',
+        data: x,
+      },
+      yAxis: {
+        type: 'value',
+      },
+      tooltip: {
+        trigger: 'axis',
+        formatter: '{c}', // Tooltip显示的格式
+      },
+      series: [
+        {
+          type: 'line',
+          smooth: true, // 设置平滑属性为 true
+          symbol: 'none', // 去掉线上的点
+          areaStyle: {
+            color: {
+              type: 'linear',
+              x: 0,
+              y: 0,
+              x2: 0,
+              y2: 1,
+              colorStops: [
+                {
+                  offset: 0,
+                  color: '#79C6FD', // 渐变起始颜色
+                },
+                {
+                  offset: 1,
+                  color: 'rgba(129, 201, 253, 0.00)', // 渐变结束颜色
+                },
+              ],
+            },
+          },
+          data: y,
+        },
+      ],
+    };
+
+    // 使用配置项显示图表
+    chart.setOption(options);
+
+    // 在组件销毁时销毁图表实例
+    return () => {
+      chart.dispose();
+    };
+  }, []);
+
+  return <div ref={chartRef} style={{ width: '100%', height: '200px' }} />;
+};
+const LineChartComponent = ({ data, total, title }: any) => {
   return (
     <>
-      <div className='text-lg text-black font-bold	mb-2 font-sans'>
-        {title}
-      </div>
+      <div className='text-lg text-black font-bold	mb-2 font-sans'>{title}</div>
       <div className='text-3xl font-bold text-primary mb-3 font-sans'>
         <svg
           width='66'
@@ -86,30 +92,8 @@ const LineChartComponent = ({total, title}:any) => {
           <rect x='1' y='1' width='64' height='20' rx='4' stroke='#74E3C8' />
         </svg>
       </div>
-      <div style={{ width: '100%', height: 140 }}>
-        <ResponsiveContainer>
-          <AreaChart
-            data={data}
-            margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
-          >
-            <defs>
-              <linearGradient id='colorPv' x1='0' y1='0' x2='0' y2='1'>
-                <stop offset='5%' stopColor='#79C6FD' stopOpacity={0.8} />
-                <stop offset='95%' stopColor='#79C6FD' stopOpacity={0} />
-              </linearGradient>
-            </defs>
-            <XAxis dataKey='name' />
-            <YAxis />
-            <CartesianGrid strokeDasharray='3 3' />
-            <Area
-              type='monotone'
-              dataKey='pv'
-              stroke='#79C6FD'
-              fillOpacity={1}
-              fill='url(#colorPv)'
-            />
-          </AreaChart>
-        </ResponsiveContainer>
+      <div style={{ width: '100%', height: '200px' }}>
+        <AreaChart data={data}></AreaChart>
       </div>
     </>
   );

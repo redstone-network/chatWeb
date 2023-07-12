@@ -7,7 +7,6 @@ import { _defaultChatConfig } from '@constants/chat';
 import { parseEventSource } from '@api/helper';
 
 const useSubmit = () => {
-  
   const { t } = useTranslation('api');
   const error = useStore((state) => state.error);
   const setError = useStore((state) => state.setError);
@@ -41,65 +40,20 @@ const useSubmit = () => {
       if (chats[currentChatIndex].messages.length === 0)
         throw new Error('No messages submitted!');
 
-      // const stream = await getData(msg);
-      // if (stream) {
-      //   if (stream.locked)
-      //     throw new Error(
-      //       'Oops, the stream is locked right now. Please try again'
-      //     );
-      //   const reader = stream.getReader();
-      //   let reading = true;
-      //   let partial = '';
-      //   while (reading && useStore.getState().generating) {
-      //     const { done, value } = await reader.read();
-      //     const result = parseEventSource(
-      //       partial + new TextDecoder().decode(value)
-      //     );
-      //     partial = '';
-
-      //     if (result === '[DONE]' || done) {
-      //       reading = false;
-      //     } else {
-      //       const resultString = result.reduce((output: string, curr: any) => {
-      //         console.log('curr', curr);
-      //         if (typeof curr === 'string') {
-      //           output += curr;
-      //         } else {
-      //           const content = curr.content;
-      //           if (content) output += content;
-      //         }
-      //         return output;
-      //       }, '');
-
-      //       const updatedChats: ChatInterface[] = JSON.parse(
-      //         JSON.stringify(useStore.getState().chats)
-      //       );
-      //       const updatedMessages = updatedChats[currentChatIndex].messages;
-      //       updatedMessages[updatedMessages.length - 1].content += resultString;
-      //       setChats(updatedChats);
-      //     }
-      //   }
-      //   if (useStore.getState().generating) {
-      //     reader.cancel('Cancelled by user');
-      //   } else {
-      //     reader.cancel('Generation completed');
-      //   }
-      //   reader.releaseLock();
-      //   stream.cancel();
-      // }
+     
       const response = await getData(msg);
       const resultString = await response.text();
-      
+
       if (isArrStringMatch(resultString)) {
         const arr = JSON.parse(resultString);
-        console.log('resultString', arr)
+        console.log('resultString', arr);
 
-        for (let i = 0; i < arr.length; i++) { 
+        for (let i = 0; i < arr.length; i++) {
           const updatedChats: ChatInterface[] = JSON.parse(
             JSON.stringify(useStore.getState().chats)
           );
           const updatedMessages = updatedChats[currentChatIndex].messages;
-          if (i === 0) { 
+          if (i === 0) {
             updatedMessages[updatedMessages.length - 1].content += arr[i];
             await setChats(updatedChats);
           } else {
@@ -114,11 +68,34 @@ const useSubmit = () => {
         const updatedChats: ChatInterface[] = JSON.parse(
           JSON.stringify(useStore.getState().chats)
         );
-        const updatedMessages = updatedChats[currentChatIndex].messages;
-        updatedMessages[updatedMessages.length - 1].content += resultString;
-        setChats(updatedChats);
+        const chunkSize = Math.ceil(resultString.length / 20);
+        const chunks = [];
+        for (let i = 0; i < resultString.length; i += chunkSize) {
+          chunks.push(resultString.slice(i, i + chunkSize));
+        }
+        // 使用setTimeout模拟流式渲染
+        const renderChunk = async (index: number) => {
+          if (index >= chunks.length) {
+            setGenerating(false);
+            return;
+          }
+
+          const updatedChats: ChatInterface[] = JSON.parse(
+            JSON.stringify(useStore.getState().chats)
+          );
+          const updatedMessages = updatedChats[currentChatIndex].messages;
+          updatedMessages[updatedMessages.length - 1].content += chunks[index];
+          await setChats(updatedChats);
+
+          setTimeout(() => {
+            renderChunk(index + 1);
+          }, 100); // 可以根据需要调整延时
+        };
+        renderChunk(0);
+        // const updatedMessages = updatedChats[currentChatIndex].messages;
+        // updatedMessages[updatedMessages.length - 1].content += resultString;
+        // setChats(updatedChats);
       }
-      
     } catch (e: unknown) {
       const err = (e as Error).message;
       setError(err);
