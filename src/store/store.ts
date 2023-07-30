@@ -44,7 +44,7 @@ const useStore = create<StoreState>()(
         foldersName: state.foldersName,
         foldersExpanded: state.foldersExpanded,
       }),
-      version: 4,
+      version: 5,
     }
   )
 );
