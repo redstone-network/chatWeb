@@ -88,7 +88,7 @@ const useSubmit = () => {
             const resultString = result.reduce((output: string, curr: any) => {
               console.log('curr', curr);
               if (typeof curr === 'string') {
-                output += curr;
+                output += curr + '\n';
               } else {
                 const content = curr.content;
                 if (content) output += content;

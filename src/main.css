@@ -237,7 +237,8 @@
     margin-bottom: 8px;
   }
   .markdown hr {
-    border-width: 2px;
+    border-width: 1px;
+    margin: 16px 0;
     border-color: #EFEFEF;
   }
   .markdown .chartBox {
@@ -317,4 +318,6 @@
 li::marker {
   content: '';
 }
-
+.message-line + .message-line > .avartor{
+  opacity: 0 !important;
+}

@@ -4,36 +4,15 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: [
-        '-apple-system,BlinkMacSystemFont',
-        'Segoe UI',
         'Roboto',
-        'Helvetica Neue',
-        'Arial',
-        'Noto Sans',
-        'sans - serif',
-        'Apple Color Emoji',
-        'Segoe UI Emoji',
-        'Segoe UI Symbol',
-        'Noto Color Emoji',
-        'Söhne',
-        'ui-sans-serif',
-        'system-ui',
-        '-apple-system',
-        'Segoe UI',
-        'Roboto',
-        'Ubuntu',
-        'Cantarell',
-        'Noto Sans',
-        'sans-serif',
-        'Helvetica Neue',
-        'Arial',
-        'Apple Color Emoji',
-        'Segoe UI Emoji',
-        'Segoe UI Symbol',
-        'Noto Color Emoji',
       ],
-      mono: ['Söhne Mono', 'Monaco', 'Andale Mono', 'Ubuntu Mono', 'monospace'],
-      urbanist: ['roboto', 'Urbanist']
+    },
+    fontSize: {
+      sm: ['12px', '14px'],
+      base: ['14px', '16px'],
+      lg: ['16px', '20px'],
+      xl: ['18px', '24px'],
+      '3xl': ['32px', '38px']
     },
     extend: {
       typography: {
@@ -60,11 +39,31 @@ module.exports = {
           808: '#9098A0',
           900: '#949494',
         },
+        gary_new: {
+          0: '#F5F5F5',
+          1: '#EFEFEF',
+          2: '#000000',
+          3: '#BBB',
+          4: '#9098A0'
+        },
+        primary: '#5FD1B2',
         logStart: '#4EBE96',
         logEnd: '#A4DA5E',
         homeMain: '#68ECCD',
-        btnStart: '#83F3F9',
-        btnEnd: '#66EBCA'
+        btnStart: '#83F9DD',
+        btnEnd: '#79C6FD',
+        sendBtn:'#B1FFEC'
+      },
+      borderRadius: {
+
+      },
+      boxShadow: {
+        'text-area': '0px 1px 7px 2px rgba(0, 0, 0, 0.10)',
+      },
+      spacing: {
+        4.5: '1.125rem',
+        35: '8.75rem',
+        'sidebar': '260px'
       },
       backgroundImage: {
         'HomeBG': "url('@src/assets/background.png')",

@@ -11,30 +11,15 @@ class QuestionMappingStrategy {
     return questionMapping[mappedQuestion] || DEFAULT_ANSWER;
   }
 }
-
-app.get('/api/integration/request', (req, res) => {
+console.log('sss')
+app.get('/api/v1/insight', (req, res) => {
   let prompt = req.query?.prompt?.trim();
-  if (!prompt) res.status(400).json({ error: 'prompt is required' });
+  if (!prompt) { return res.status(400).json({ error: 'prompt is required' }) };
   prompt = prompt.toLowerCase();
-  console.log(prompt)
   const strategy = new QuestionMappingStrategy();
   const response = strategy.getResponse(prompt);
+  res.set('Content-Type', 'text/plain');
   res.send(response);
-});
-
-app.get('/api/stream', (req, res) => {
-   // 设置响应头，指定内容为流式输出
-   res.setHeader('Content-Type', 'text/plain');
-   res.setHeader('Content-Disposition', 'attachment; filename="stream.txt"');
- 
-   // 模拟生成大量数据
-   for (let i = 0; i < 100; i++) {
-     // 将数据写入响应
-     res.write(`Data ${i}\n`);
-   }
- 
-   // 结束响应
-   res.end();
 });
 
 app.listen(port, () => {

@@ -95,7 +95,7 @@ const EditView = ({
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if ((e.ctrlKey || e.shiftKey) && e.key === 'Enter') {
-      return
+      return;
     } else if (e.key === 'Enter') {
       e.preventDefault();
       if (sticky) {
@@ -166,21 +166,19 @@ const EditView = ({
   }, []);
 
   return (
-    <div className='fixed bottom-0 left-0 right-0 shrink-0 px-3 py-8 bg-vert-light-gradient dark:bg-vert-dark-gradient transition-transform md:ml-[358px] bg-white'>
+    <div className='shrink-0 pt-10 pb-8 transition-transform bg-white'>
       {error && (
-        <div className='text-center max-w-3xl mx-auto p-2 border rounded-md	border-rose-700	text-rose-700 mb-2'>
+        <div className='text-center max-w-[720px] mx-auto p-2 border rounded-md	border-rose-700	text-rose-700 mb-2'>
           {error}
         </div>
       )}
-      <div className='max-w-3xl mx-auto h-full'>
+      <div className='max-w-[720px] mx-auto h-full'>
         <div className='relative'>
-          <div className='flex items-center h-full bg-white  shadow-md
-
- rounded-xl focus-within:ring-2 ring-gray-300'>
+          <div className='flex items-center h-full bg-white  shadow-text-area rounded-[10px] focus-within:ring-0 ring-gray-300'>
             <textarea
               ref={textareaRef}
-              className='flex-grow outline-none bg-transparent scroll-p-2 px-3 py-2 min-h-[2.6rem] rounded-xl resize-none'
-              placeholder='Type message or / to select a prompt'
+              className='flex-grow outline-none bg-transparent scroll-p-2 px-3 py-3 min-h-[50px] rounded-xl resize-none'
+              placeholder='Type message'
               onChange={(e) => {
                 _setContent(e.target.value);
               }}
@@ -192,21 +190,19 @@ const EditView = ({
               <button
                 type='button'
                 onClick={clickHandle}
-                className='h-8 w-8 hover:bg-zinc-300 rounded-xl inline-flex items-center justify-center'
+                className='h-[36px] w-[40px] hover:bg-sendBtn  rounded-lg inline-flex items-center justify-center'
               >
                 <svg
-                  width='24'
-                  height='19'
-                  viewBox='0 0 24 19'
-                  fill='none'
                   xmlns='http://www.w3.org/2000/svg'
+                  width='23'
+                  height='18'
+                  viewBox='0 0 23 18'
+                  fill='none'
                 >
                   <path
-                    d='M22.0178 9.7095L1.33386 1.18524L6.27447 9.38864M22.0178 9.7095L1.80963 17.788L6.27447 9.38864M22.0178 9.7095L6.27447 9.38864'
+                    d='M22.0178 9.2095L1.33386 0.685242L6.27447 8.88864M22.0178 9.2095L1.80963 17.288L6.27447 8.88864M22.0178 9.2095L6.27447 8.88864'
                     stroke='#BBBBBB'
-                    strokeWidth='2'
                     strokeLinecap='round'
-                    strokeLinejoin='round'
                   />
                 </svg>
               </button>
@@ -214,46 +210,63 @@ const EditView = ({
           </div>
         </div>
       </div>
-      <div className='pt-3'>
-        <div className='max-w-3xl mx-auto flex justify-center h-full items-center'>
-          <div className='text-xs flex items-center gap-2'>
+      <div className='pt-3.5'>
+        <div className='max-w-[720px] mx-auto flex justify-center h-full items-center'>
+          <div className='text-sm flex items-center gap-2'>
             <button
               type='button'
-              className='rounded-lg px-2 inline-flex items-center justify-center border shrink-0 text-center disabled:pointer-events-none bg-white text-xs border-gray-300 text-gray-300 h-6'
+              className='rounded-lg px-2 inline-flex items-center justify-center border shrink-0 text-center disabled:pointer-events-none bg-white text-sm border-gray-300 text-gray-300 h-6'
             >
               <svg
-                className='mr-2'
-                width='10'
-                height='9'
-                viewBox='0 0 10 9'
-                fill='none'
+                className="mr-2"
                 xmlns='http://www.w3.org/2000/svg'
+                width='12'
+                height='12'
+                viewBox='0 0 12 12'
+                fill='none'
               >
-                <circle cx='5.00073' cy='4.5' r='4' stroke='#949494' />
+                <mask
+                  id='mask0_2902_1203'
+                  maskUnits='userSpaceOnUse'
+                  x='1'
+                  y='1'
+                  width='11'
+                  height='10'
+                >
+                  <path
+                    d='M9.00073 5H11.0007V1.5H1.00073V11H11.0007V6H9.00073V5Z'
+                    fill='white'
+                  />
+                </mask>
+                <g mask='url(#mask0_2902_1203)'>
+                  <circle cx='6.00073' cy='6' r='4' stroke='#949494' />
+                </g>
+                <path d='M7.00073 5H10.5007V1.5L7.00073 5Z' fill='#949494' />
               </svg>
               Regenerate
             </button>
             <button
               type='button'
-              onClick={
-                () => {
-                  if (!generating) { setError(''); addChat() };
-               }
-              }
-              className='rounded-lg px-2 inline-flex items-center justify-center border shrink-0 text-center disabled:pointer-events-none bg-white text-xs border-gray-300 text-gray-300 h-6'
+              onClick={() => {
+                if (!generating) {
+                  setError('');
+                  addChat();
+                }
+              }}
+              className='rounded-lg px-2 inline-flex items-center justify-center border shrink-0 text-center disabled:pointer-events-none bg-white text-sm border-gray-300 text-gray-300 h-6'
             >
               <svg
-                className='mr-2'
-                width='12'
-                height='13'
-                viewBox='0 0 12 13'
-                fill='none'
+                className="mr-2"
                 xmlns='http://www.w3.org/2000/svg'
+                width='12'
+                height='12'
+                viewBox='0 0 12 12'
+                fill='none'
               >
                 <path
                   fillRule='evenodd'
                   clipRule='evenodd'
-                  d='M9.70647 0.934003C9.43147 0.656834 9.05493 0.5 8.66213 0.5C8.26978 0.5 7.89365 0.65648 7.61708 0.934726L0.796538 7.75521C0.347892 8.15051 0.0537892 8.73874 0.00268078 9.37135L0.000732422 11.9001V12.5H3.08113C3.76163 12.4533 4.35564 12.1563 4.77468 11.673L11.5668 4.88299C11.8438 4.60602 11.9994 4.23036 11.9994 3.83866C11.9994 3.44696 11.8438 3.0713 11.5668 2.79433L9.70647 0.934003ZM3.89737 10.856C3.65781 11.13 3.35948 11.2792 3.03898 11.3019L1.20081 11.3007V9.41987C1.22499 9.14475 1.37536 8.844 1.61842 8.62902L8.4681 1.78098C8.51948 1.7292 8.5894 1.70007 8.66235 1.70007C8.73529 1.70007 8.80521 1.7292 8.85659 1.78098L10.7186 3.64297C10.7705 3.69493 10.7997 3.76539 10.7997 3.83887C10.7997 3.91235 10.7705 3.98282 10.7186 4.03477L3.89737 10.856Z'
+                  d='M9.70647 0.434003C9.43147 0.156834 9.05493 0 8.66213 0C8.26978 0 7.89365 0.15648 7.61708 0.434726L0.796538 7.25521C0.347892 7.65051 0.0537892 8.23874 0.00268078 8.87135L0.000732422 11.4001V12H3.08113C3.76163 11.9533 4.35564 11.6563 4.77468 11.173L11.5668 4.38299C11.8438 4.10602 11.9994 3.73036 11.9994 3.33866C11.9994 2.94696 11.8438 2.5713 11.5668 2.29433L9.70647 0.434003ZM3.89737 10.356C3.65781 10.63 3.35948 10.7792 3.03898 10.8019L1.20081 10.8007V8.91987C1.22499 8.64475 1.37536 8.344 1.61842 8.12902L8.4681 1.28098C8.51948 1.2292 8.5894 1.20007 8.66235 1.20007C8.73529 1.20007 8.80521 1.2292 8.85659 1.28098L10.7186 3.14297C10.7705 3.19493 10.7997 3.26539 10.7997 3.33887C10.7997 3.41235 10.7705 3.48282 10.7186 3.53477L3.89737 10.356Z'
                   fill='#BBBBBB'
                 />
               </svg>
@@ -281,21 +294,13 @@ const InputBar = React.memo(
     const [isEdit, setIsEdit] = useState<boolean>(sticky);
 
     return (
-      <div
-        className={`w-full border-b border-black/10 dark:border-gray-900/50 text-gray-800 bg-white group`}
-      >
-        <div
-          className={`text-sm flex transition-all justify-center bgimage ease-in-out py-3`}
-        >
-          <div>
-            <EditView
-              content={content}
-              setIsEdit={setIsEdit}
-              messageIndex={messageIndex}
-              sticky={sticky}
-            />
-          </div>
-        </div>
+      <div className={`w-full border-t border-gary_new-1 bg-white group`}>
+        <EditView
+          content={content}
+          setIsEdit={setIsEdit}
+          messageIndex={messageIndex}
+          sticky={sticky}
+        />
       </div>
     );
   }
