@@ -1,51 +1,22 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
-import useStore from '@store/store';
-
-import PlusIcon from '@icon/PlusIcon';
-import Avatar from '@icon/Avatar';
-import useAddChat from '@hooks/useAddChat';
+import Avatar from '@src/assets/user.png';
 
 const NewChat = () => {
-  const { t } = useTranslation();
-  const addChat = useAddChat();
-  const generating = useStore((state) => state.generating);
-  const setError = useStore((state) => state.setError);
-  //   <button
-  //   type='button'
-  //   onClick={() => {
-  //     if (!generating) { setError(''); addChat() };
-  //   }}
-  //   className='h-6 w-full inline-flex items-center whitespace-nowrap justify-start bg-transparent hover:text-black'
-  // >
-  //   <PlusIcon /> New Chat
-  // </button>
-  // <div className='flex items-center'>
-  //   <button
-  //     type='button'
-  //     className='inline-flex items-center hover:text-black outline-none'
-  //     aria-haspopup='menu'
-  //     aria-expanded='false'
-  //     data-state='closed'
-  //   >
-  //     <span className='i-tabler-dots'></span>
-  //   </button>
-  // </div>
   return (
-    <div className='border-t-2 shrink-0 p-7'>
-      <div className='bg-btn right-8	 text-sm absolute text-white h-5 w-[62px] text-center rounded'>
+    <div className='border-t shrink-0 px-4 pt-6 pb-5 relative'>
+      <div className='right-4	bg-gradient-to-tr text-sm from-btnStart to-btnEnd absolute text-white py- text-center rounded py-0.5 px-2'>
         Free
       </div>
-      <div className='flex text-sm items-center pb-4'>
+      <div className='flex items-center pb-4'>
         <div className='mr-2'>
-          <Avatar />
+          <img className="w-10 h-10" src={Avatar} alt="" />
         </div>
         <div>
-          <div className='text-black'>User</div>
-          <div className='text-gray-500	'>0xfwer8097wgweg0879gewgw35</div>
+          <div className='text-black text-base'>User</div>
+          <div className='text-gray-500	text-sm'>0xfw...gw35</div>
         </div>
       </div>
-      <div className='font-bold	text-white text-sm flex items-center justify-center rounded-xl	bg-btn h-[44px] w-[296px] cursor-pointer mx-auto mb-3'>
+      <div className='font-bold	text-white text-base flex items-center justify-center rounded-lg	bg-gradient-to-tr from-btnStart to-btnEnd h-8 w-[212px] cursor-pointer mx-auto mb-3'>
         Upgrade to Pro
       </div>
       <div className='flex text-sm text-gray-900 items-center'>

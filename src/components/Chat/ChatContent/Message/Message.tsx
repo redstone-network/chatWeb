@@ -23,17 +23,17 @@ const Message = React.memo(
 
     return (
       <div
-        className={`w-full text-gray-800 dark:text-gray-100 flex py-4 ${
-          role === 'user' ? 'justify-end' : 'justify-start'
+        className={`w-full text-gary_new-2  flex py-3.5 ${
+          role === 'user' ? 'justify-end' : 'justify-start message-line'
         } `}
       >
         {!(role === 'user') && (
-          <div className='h-10 w-10 rounded-xl inline-flex items-center justify-center text-2xl mr-2 text-white'>
+          <div className='h-8 w-8 inline-flex items-center avartor justify-center text-base mr-2.5'>
             <AvartorIcon />
           </div>
         )}
         <div
-          className={`text-base	 flex transition-all max-w-[80%] flex-col ease-in-out rounded-xl p-4 w-fit bg-white`}
+          className='text-base	flex transition-all max-w-[84%] flex-col ease-in-out px-4 py-2 w-fit bg-white rounded-[10px]'
         >
           <MessageContent
             role={role}
@@ -45,8 +45,8 @@ const Message = React.memo(
           />
         </div>
         {(role === 'user') && (
-          <div className='h-10 w-10 rounded-full bg-homeMain inline-flex items-center justify-center text-2xl ml-2 text-white'>
-            U
+          <div className='ml-2 avartor'>
+            <AvartorIconUser />
           </div>
         )}
       </div>

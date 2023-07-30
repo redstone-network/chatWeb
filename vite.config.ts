@@ -23,7 +23,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://137.184.5.217:3005/',
+        target: 'https://demo.chatdatainsight.com/',
         changeOrigin: true,
       },
     }

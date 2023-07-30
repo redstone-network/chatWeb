@@ -41,12 +41,13 @@ const ChatContent = () => {
   return (
     <div className='flex-1 overflow-hidden relative'>
       <ScrollToBottom
-        className='h-full dark:bg-gray-800'
+        className='h-full'
         followButtonClassName='hidden'
       >
-        <div className='flex flex-col items-center text-sm dark:bg-gray-800'>
+        <div className='flex flex-col items-center text-base'>
+          <div className='w-full h-10'></div>
           <div
-            className='flex flex-col items-center text-sm dark:bg-gray-800 md:w-[892px]'
+            className='flex flex-col items-center text-gary_new-2 md:w-[935px]'
             ref={saveRef}
           >
             {messages?.length === 0 && <NewMessageButton messageIndex={-1} />}
@@ -62,7 +63,7 @@ const ChatContent = () => {
               </React.Fragment>
             ))}
           </div>
-          <div className='w-full h-36'></div>
+          <div className='w-full h-40'></div>
         </div>
       </ScrollToBottom>
       <div className='absolute w-full bottom-0'>
