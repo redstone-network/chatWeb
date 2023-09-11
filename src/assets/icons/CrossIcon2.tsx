@@ -2,19 +2,9 @@ import React from 'react';
 
 const CrossIcon2 = () => {
   return (
-    <svg
-      aria-hidden='true'
-      className='w-5 h-5'
-      fill='currentColor'
-      viewBox='0 0 20 20'
-      xmlns='http://www.w3.org/2000/svg'
-    >
-      <path
-        fillRule='evenodd'
-        d='M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z'
-        clipRule='evenodd'
-      ></path>
-    </svg>
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M13.5725 10L20 3.57254L16.4275 0L10 6.42746L3.57254 0L0 3.57254L6.42746 10L0 16.4275L3.57254 20L10 13.5725L16.4275 20L20 16.4275L13.5725 10Z" fill="#A8A8A8"/>
+</svg>
   );
 };
 

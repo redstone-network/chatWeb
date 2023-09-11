@@ -12,6 +12,7 @@ module.exports = {
       base: ['14px', '16px'],
       lg: ['16px', '20px'],
       xl: ['18px', '24px'],
+      '2xl': ['24px', '28px'],
       '3xl': ['32px', '38px']
     },
     extend: {
@@ -26,6 +27,7 @@ module.exports = {
         },
       },
       colors: {
+        'dark-gray': '#949494',
         gray: {
           50: '#f7f7f8',
           100: '#f5f5f5',
@@ -52,7 +54,8 @@ module.exports = {
         homeMain: '#68ECCD',
         btnStart: '#83F9DD',
         btnEnd: '#79C6FD',
-        sendBtn:'#B1FFEC'
+        sendBtn:'#B1FFEC',
+        textHig:'#51C9FD',
       },
       borderRadius: {
 

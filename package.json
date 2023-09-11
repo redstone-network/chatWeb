@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@dqbd/tiktoken": "^1.0.2",
+    "@metamask/detect-provider": "^2.0.0",
+    "@metamask/sdk": "^0.6.1",
     "echarts": "^5.4.2",
     "html2canvas": "^1.4.1",
     "i18next": "^22.4.11",

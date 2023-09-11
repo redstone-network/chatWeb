@@ -34,7 +34,7 @@ const PopupModal = ({
       <div className='fixed top-0 left-0 z-[999] w-full p-4 overflow-x-hidden overflow-y-auto h-full flex justify-center items-center'>
         <div className='relative z-2 max-w-2xl md:h-auto flex justify-center max-h-full'>
           <div className='relative bg-gray-50 rounded-lg shadow dark:bg-gray-700 max-h-full overflow-y-auto hide-scroll-bar'>
-            <div className='flex items-center justify-between p-4 border-b rounded-t dark:border-gray-600'>
+            <div className='flex items-center justify-between p-8 rounded-t'>
               <h3 className='ml-2 text-lg font-semibold text-gray-900 dark:text-white'>
                 {title}
               </h3>
@@ -56,27 +56,6 @@ const PopupModal = ({
             )}
 
             {children}
-
-            <div className='flex items-center justify-center p-6 gap-4'>
-              {handleConfirm && (
-                <button
-                  type='button'
-                  className='btn btn-primary'
-                  onClick={handleConfirm}
-                >
-                  {t('confirm')}
-                </button>
-              )}
-              {cancelButton && (
-                <button
-                  type='button'
-                  className='btn btn-neutral'
-                  onClick={_handleClose}
-                >
-                  {t('cancel')}
-                </button>
-              )}
-            </div>
           </div>
         </div>
         <div
