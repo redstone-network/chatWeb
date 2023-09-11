@@ -13,8 +13,8 @@ const Menu = () => {
 
   return (
     <div id='menu' className='bg-white'>
-      <div className='md:hidden'>
-        <div className='p-2'>
+      <div className='lg:hidden'>
+        <div className='p-2 fixed z-10'>
           <MenuIcon onClick={toggle}></MenuIcon>
         </div>
         <div
@@ -31,7 +31,7 @@ const Menu = () => {
           </div>
         </div>
       </div>
-      <div className="w-sidebar px-2 flex flex-col h-full justify-between">
+      <div className="w-sidebar px-2 flex-col h-full hidden lg:flex justify-between lg:visible">
         <header className='flex items-end border-b border-gary_new-1 p-4'>
           <div className='pr-2'>
             <LogoIcon />

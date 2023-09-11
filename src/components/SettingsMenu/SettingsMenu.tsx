@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PopupModal from '@components/PopupModal';
 import detectEthereumProvider from '@metamask/detect-provider';
-import TickIcon from '@icon/TickIcon';
+import ArrowBottom from '@icon/ArrowBottom';
 
 const SettingsMenu = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
@@ -96,7 +96,7 @@ const SettingsMenu = () => {
                   onClick={handleConnect}
                   className='w-[408px] h-[56px] bg-black text-white rounded-xl font-bold	 text-lg leading-6 mb-16 flex justify-center items-center mx-auto'
                 >
-                  <TickIcon />
+                  <ArrowBottom />
                   <span className='ml-4'>Metamask</span>
                 </div>
               </div>

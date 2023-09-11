@@ -18,7 +18,7 @@ const NewChat = () => {
           <div className='text-gray-500	text-sm'>0xfw...gw35</div>
         </div>
       </div> */}
-      <div className='font-bold	text-black text-base flex items-center justify-center rounded-lg	 border-textHig border h-8 w-[212px] cursor-pointer mx-auto mb-3'>
+      <div className='font-bold	text-black text-base flex items-center justify-center rounded-lg	 border-textHig border h-10 w-[212px] cursor-pointer mx-auto mb-3'>
         Connect Wallet
       </div>
       <div className='flex text-sm text-gray-900 items-center justify-around py-2'>
