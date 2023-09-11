@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PopupModal from '@components/PopupModal';
 import detectEthereumProvider from '@metamask/detect-provider';
 import ArrowBottom from '@icon/ArrowBottom';
+import Toast from '@utils/toast';
 
 const SettingsMenu = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
@@ -53,7 +54,7 @@ const SettingsMenu = () => {
     setIsConnecting(true); /* New */
     await window.ethereum
       .request({
-        /* Updated */ method: 'eth_requestAccounts',
+        method: 'eth_requestAccounts',
       })
       .then((accounts: []) => {
         /* New */
@@ -70,12 +71,13 @@ const SettingsMenu = () => {
   const disableConnect = Boolean(wallet) && isConnecting;
   return (
     <>
-      <a
-        className='flex py-3 px-3 items-center gap-3 rounded-md hover:bg-gray-500/3 transition-colors duration-200 text-white cursor-pointer text-sm'
-        onClick={() => {
-          setIsModalOpen(true);
-        }}
-      >a</a>
+      <div onClick={() => {
+          Toast('Connect Wallet', 'success');
+          //setIsModalOpen(true);
+        }} className='font-bold	text-black text-base flex items-center justify-center rounded-lg	 border-textHig border h-10 w-[212px] cursor-pointer mx-auto mb-3'>
+        Connect Wallet
+      </div>
+
       {isModalOpen && (
         <PopupModal
           setIsModalOpen={setIsModalOpen}

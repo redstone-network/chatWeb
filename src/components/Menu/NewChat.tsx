@@ -1,3 +1,4 @@
+import SettingsMenu from '@components/SettingsMenu';
 import Discord from '@icon/Discord';
 import LogoutIcon from '@icon/LogoutIcon';
 import Twitter from '@icon/Twitter';
@@ -18,9 +19,7 @@ const NewChat = () => {
           <div className='text-gray-500	text-sm'>0xfw...gw35</div>
         </div>
       </div> */}
-      <div className='font-bold	text-black text-base flex items-center justify-center rounded-lg	 border-textHig border h-10 w-[212px] cursor-pointer mx-auto mb-3'>
-        Connect Wallet
-      </div>
+      <SettingsMenu/>
       <div className='flex text-sm text-gray-900 items-center justify-around py-2'>
         <LogoutIcon/>
         <Twitter/>
