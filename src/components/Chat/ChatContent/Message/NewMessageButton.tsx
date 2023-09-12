@@ -32,7 +32,7 @@ const NewMessageButton = React.memo(
         <div className='text-center font-sans text-lg mt-10 mb-4'>Don’t know what to ask? Try these questions.</div>
         <div className='pt-4 pb-4 w-[820px] mx-auto flex  justify-between'>
         {list.map((item)=>{
-          return (<div className="bg-white rounded px-8 py-6 border-slate-400 h-[165px] w-[260px] border flex flex-col items-center justify-between hover:bg-gray-200">
+          return (<div key={item.id} className="bg-white rounded px-8 py-6 border-slate-400 h-[165px] w-[260px] border flex flex-col items-center justify-between hover:bg-gray-200">
             <div><WhatIcon/></div>
             <div className="text-center text-lg">List the recent valuable project airdrops and the specific steps to participate in them.</div>
           </div>)
@@ -40,7 +40,7 @@ const NewMessageButton = React.memo(
         </div>
         <div className='pt-4 w-[820px] mx-auto flex  justify-between'>
         {list.map((item)=>{
-          return (<div className="bg-white rounded px-8 py-6 border-slate-400 h-[165px] w-[260px] border flex flex-col items-center justify-between">
+          return (<div key={item.id} className="bg-white rounded px-8 py-6 border-slate-400 h-[165px] w-[260px] border flex flex-col items-center justify-between">
             <div><WhatIcon/></div>
             <div className="text-center text-lg">List the recent valuable project airdrops and the specific steps to participate in them.</div>
           </div>)

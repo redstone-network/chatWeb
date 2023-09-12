@@ -7,74 +7,92 @@ import Toast from '@utils/toast';
 const SettingsMenu = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
   const [hasProvider, setHasProvider] = useState<boolean | null>(null);
-  const initialState = { accounts: [] }; /* New */
-  const [wallet, setWallet] = useState(initialState); /* New */
-  const [isConnecting, setIsConnecting] = useState(false); /* New */
-  const [error, setError] = useState(false); /* New */
-  const [errorMessage, setErrorMessage] = useState(''); /* New */
-  useEffect(() => {
-    const refreshAccounts = (accounts: any) => {
-      /* New */
-      if (accounts.length > 0) {
-        /* New */
-        updateWallet(accounts); /* New */
-      } else {
-        /* New */
-        // if length 0, user is disconnected                    /* New */
-        setWallet(initialState); /* New */
-      } /* New */
-    }; /* New */
-
-    const getProvider = async () => {
-      const provider = await detectEthereumProvider({ silent: true });
-      console.log(provider);
-      setHasProvider(Boolean(provider)); // transform provider to true or false
-      if (provider) {
-        /* New */
-        const accounts = await window.ethereum.request(
-          /* New */
-          { method: 'eth_accounts' } /* New */
-        ); /* New */
-        refreshAccounts(accounts); /* New */
-        window.ethereum.on('accountsChanged', refreshAccounts); /* New */
-      }
-    };
-
-    getProvider();
-    return () => {
-      /* New */
-      window.ethereum?.removeListener('accountsChanged', refreshAccounts);
-    };
-  }, []);
+  const initialState = { accounts: [] }; 
+  const [wallet, setWallet] = useState(initialState); 
+  const [isConnecting, setIsConnecting] = useState(false); 
+  const [error, setError] = useState(false); 
+  const [errorMessage, setErrorMessage] = useState(''); 
   const updateWallet = async (accounts: any) => {
     setWallet({ accounts });
   };
+  const refreshAccounts = (accounts: any) => {
+    if (accounts.length > 0) {
+      updateWallet(accounts);
+    } else {
+      setWallet(initialState);
+    }
+  };
+  const getProvider = async () => {
+    const provider = await detectEthereumProvider({ silent: true });
+    setHasProvider(Boolean(provider));
+    if (provider) {
+      const accounts = await window.ethereum.request({
+        method: 'eth_accounts',
+      });
+      refreshAccounts(accounts);
+    }
+  };
+  // useEffect(() => {
+  //   const refreshAccounts = (accounts: any) => {
+  //     
+  //     if (accounts.length > 0) {
+  //       
+  //       updateWallet(accounts); 
+  //     } else {
+  //       
+  //       // if length 0, user is disconnected                    
+  //       setWallet(initialState); 
+  //     } 
+  //   };
+
+  //   const getProvider = async () => {
+  //     const provider = await detectEthereumProvider({ silent: true });
+  //     console.log(provider);
+  //     setHasProvider(Boolean(provider));
+  //     if (provider) {
+  //       const accounts = await window.ethereum.request(
+  //         { method: 'eth_accounts' }
+  //       );
+  //       refreshAccounts(accounts);
+  //       window.ethereum.on('accountsChanged', refreshAccounts);
+  //     }
+  //   };
+
+  //   getProvider();
+  //   return () => {
+  //     window.ethereum?.removeListener('accountsChanged', refreshAccounts);
+  //   };
+  // }, []);
+
 
   const handleConnect = async () => {
-    setIsConnecting(true); /* New */
+    setIsConnecting(true);
     await window.ethereum
       .request({
         method: 'eth_requestAccounts',
       })
       .then((accounts: []) => {
-        /* New */
-        setError(false); /* New */
-        updateWallet(accounts); /* New */
-      }) /* New */
+        console.log(accounts);
+        setError(false);
+        updateWallet(accounts);
+      })
       .catch((err: any) => {
-        /* New */
-        setError(true); /* New */
-        setErrorMessage(err.message); /* New */
-      }); /* New */
+        setError(true);
+        setErrorMessage(err.message);
+      });
     setIsConnecting(false);
   };
   const disableConnect = Boolean(wallet) && isConnecting;
+
   return (
     <>
-      <div onClick={() => {
-          Toast('Connect Wallet', 'success');
-          //setIsModalOpen(true);
-        }} className='font-bold	text-black text-base flex items-center justify-center rounded-lg	 border-textHig border h-10 w-[212px] cursor-pointer mx-auto mb-3'>
+      <div
+        onClick={() => {
+          // Toast('Connect Wallet', 'success');
+          setIsModalOpen(true);
+        }}
+        className='font-bold	text-black text-base flex items-center justify-center rounded-lg	 border-textHig border h-10 w-[212px] cursor-pointer mx-auto mb-3'
+      >
         Connect Wallet
       </div>
 
@@ -125,7 +143,7 @@ const SettingsMenu = () => {
                 </div>
               </div>
             )}
-            {error /* New code block */ && (
+            {error && (
               <div onClick={() => setError(false)}>
                 <strong>Error:</strong> {errorMessage}
               </div>
