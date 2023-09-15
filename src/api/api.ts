@@ -1,3 +1,4 @@
+import useStore from '@store/store';
 import { ShareGPTSubmitBodyInterface } from '@type/api';
 import { ConfigInterface, MessageInterface } from '@type/chat';
 
@@ -27,12 +28,15 @@ export const getChatCompletion = async (
   return data;
 };
 export const getData = async ( msg: string) => {
+  const token = useStore.getState().token;
+  const headers: HeadersInit = {
+    'Content-Type': 'application/json',
+  };
+  if (token) headers.Authorization = `Bearer ${token}`;
 
-  const response = await fetch(`${import.meta.env.VITE_REQUEST_URL}/v1/insight?prompt="${msg}"`, {
+  const response = await fetch(`${import.meta.env.VITE_REQUEST_URL}/v1/get_insight_with_token?prompt="${msg}"`, {
     method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers
   });
   if (response.status === 404 || response.status === 405) {
     const text = await response.text();
@@ -47,12 +51,18 @@ export const getData = async ( msg: string) => {
       );
     }
   }
-
+  if (response.status === 401) {
+    return response.status
+  }
+  if (response.status === 402) {
+    return response.status
+  }
   if (response.status === 400 || !response.ok) {
     const text = await response.json();
     let error = text.message;
     throw new Error(error);
   }
+
 
 
   const stream = response.body;
@@ -122,4 +132,24 @@ export const submitShareGPT = async (body: ShareGPTSubmitBodyInterface) => {
   const { id } = response;
   const url = `https://shareg.pt/${id}`;
   window.open(url, '_blank');
+};
+
+export const login = async (wallet: string) => {
+  const headers: HeadersInit = {
+    'Content-Type': 'application/json',
+  };
+  const response = await fetch(`${import.meta.env.VITE_REQUEST_URL}/v1/login_with_wallet`, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({
+      "wallet": wallet,
+      "password": "123",
+      "wallet_address": "string",
+      "username": "string"
+    }),
+  });
+  if (!response.ok) throw new Error(await response.text());
+
+  const data = await response.json();
+  return data;
 };

@@ -17,7 +17,8 @@ const useSubmit = () => {
   const generating = useStore((state) => state.generating);
   const currentChatIndex = useStore((state) => state.currentChatIndex);
   const setChats = useStore((state) => state.setChats);
-
+  const setToken = useStore((state) => state.setToken);
+  const setAccount = useStore((state) => state.setAccount);
   const generateTitle = async (
     message: MessageInterface[]
   ): Promise<string> => {
@@ -67,6 +68,30 @@ const useSubmit = () => {
         throw new Error('No messages submitted!');
 
       const stream = await getData(msg);
+      if (stream === 401) {
+        // 提示用户链接钱包登录
+        const resultString = 'Please connect your wallet first';
+        const updatedChats: ChatInterface[] = JSON.parse(
+          JSON.stringify(useStore.getState().chats)
+        );
+        const updatedMessages = updatedChats[currentChatIndex].messages;
+        updatedMessages[updatedMessages.length - 1].content += resultString;
+        setChats(updatedChats);
+        setAccount('');
+        setToken('');
+        return
+      }
+      if (stream === 402) {
+        // 提示用户免费次数5次已经用完
+        const resultString = 'You have used up your free trial';
+        const updatedChats: ChatInterface[] = JSON.parse(
+          JSON.stringify(useStore.getState().chats)
+        );
+        const updatedMessages = updatedChats[currentChatIndex].messages;
+        updatedMessages[updatedMessages.length - 1].content += resultString;
+        setChats(updatedChats);
+        return
+      }
       if (stream) {
         if (stream.locked)
           throw new Error(
@@ -75,6 +100,7 @@ const useSubmit = () => {
         const reader = stream.getReader();
         let reading = true;
         let partial = '';
+        
         while (reading && useStore.getState().generating) {
           const { done, value } = await reader.read();
           const result = parseEventSource(

@@ -29,6 +29,10 @@ const useStore = create<StoreState>()(
         chats: state.chats,
         currentChatIndex: state.currentChatIndex,
         apiKey: state.apiKey,
+        account: state.account,
+        token: state.token,
+        answerCount: state.answerCount,
+        answerTime: state.answerTime,
         apiEndpoint: state.apiEndpoint,
         theme: state.theme,
         autoTitle: state.autoTitle,
@@ -40,7 +44,7 @@ const useStore = create<StoreState>()(
         foldersName: state.foldersName,
         foldersExpanded: state.foldersExpanded,
       }),
-      version: 6,
+      version: 7,
     }
   )
 );

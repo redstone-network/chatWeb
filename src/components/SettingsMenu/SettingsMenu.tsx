@@ -3,23 +3,27 @@ import PopupModal from '@components/PopupModal';
 import detectEthereumProvider from '@metamask/detect-provider';
 import ArrowBottom from '@icon/ArrowBottom';
 import Toast from '@utils/toast';
+import { login } from '@api/api';
+import useStore from '@store/store';
+import Avatar from '../../assets/user.png';
 
 const SettingsMenu = () => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
+  const token  = useStore((state) => state.token);
+  const setToken  = useStore((state) => state.setToken);
+  const account = useStore((state) => state.account);
+  const setAccount = useStore((state) => state.setAccount);
+  const answerCount = useStore((state) => state.answerCount);
+
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [hasProvider, setHasProvider] = useState<boolean | null>(null);
-  const initialState = { accounts: [] }; 
-  const [wallet, setWallet] = useState(initialState); 
   const [isConnecting, setIsConnecting] = useState(false); 
   const [error, setError] = useState(false); 
   const [errorMessage, setErrorMessage] = useState(''); 
-  const updateWallet = async (accounts: any) => {
-    setWallet({ accounts });
-  };
   const refreshAccounts = (accounts: any) => {
     if (accounts.length > 0) {
-      updateWallet(accounts);
+      setAccount(accounts[0]);
     } else {
-      setWallet(initialState);
+      setAccount('');
     }
   };
   const getProvider = async () => {
@@ -32,37 +36,33 @@ const SettingsMenu = () => {
       refreshAccounts(accounts);
     }
   };
-  // useEffect(() => {
-  //   const refreshAccounts = (accounts: any) => {
-  //     
-  //     if (accounts.length > 0) {
-  //       
-  //       updateWallet(accounts); 
-  //     } else {
-  //       
-  //       // if length 0, user is disconnected                    
-  //       setWallet(initialState); 
-  //     } 
-  //   };
+  useEffect(() => {
+    const refreshAccounts = (accounts: any) => {
+      
+      if (accounts.length > 0) {
+        if(account[0] !== account) {
+          setToken('');
+          setAccount(''); 
+        }
+      } else {
+        setAccount('')
+        setToken('');
+      } 
+    };
 
-  //   const getProvider = async () => {
-  //     const provider = await detectEthereumProvider({ silent: true });
-  //     console.log(provider);
-  //     setHasProvider(Boolean(provider));
-  //     if (provider) {
-  //       const accounts = await window.ethereum.request(
-  //         { method: 'eth_accounts' }
-  //       );
-  //       refreshAccounts(accounts);
-  //       window.ethereum.on('accountsChanged', refreshAccounts);
-  //     }
-  //   };
+    const getProvider = async () => {
+      const provider = await detectEthereumProvider({ silent: true });
+      setHasProvider(Boolean(provider));
+      if (provider) {
+        window.ethereum.on('accountsChanged', refreshAccounts);
+      }
+    };
 
-  //   getProvider();
-  //   return () => {
-  //     window.ethereum?.removeListener('accountsChanged', refreshAccounts);
-  //   };
-  // }, []);
+    getProvider();
+    return () => {
+      window.ethereum?.removeListener('accountsChanged', refreshAccounts);
+    };
+  }, []);
 
 
   const handleConnect = async () => {
@@ -71,22 +71,42 @@ const SettingsMenu = () => {
       .request({
         method: 'eth_requestAccounts',
       })
-      .then((accounts: []) => {
-        console.log(accounts);
+      .then(async (accounts: string[]) => {
         setError(false);
-        updateWallet(accounts);
+        const res = await login(accounts[0]);
+        if (res && res.access_token) {
+          setAccount(accounts[0]);
+          setToken(res.access_token);
+        }
       })
       .catch((err: any) => {
         setError(true);
+        setAccount('');
         setErrorMessage(err.message);
       });
     setIsConnecting(false);
   };
-  const disableConnect = Boolean(wallet) && isConnecting;
+  const logout = () => {
+    setToken('');
+    setAccount('');
+  }
 
   return (
     <>
-      <div
+    {account && (<><div className='right-4	bg-gradient-to-tr text-sm from-btnStart to-btnEnd absolute text-white py- text-center rounded py-0.5 px-2'>
+        Free
+      </div><div className='flex items-center pb-4'>
+          <div className='mr-2'>
+            <img className="w-10 h-10" src={Avatar} alt="" />
+          </div>
+          <div className='cursor-pointer' onClick={() => {
+          setIsModalOpen(true);
+        }}>
+            <div className='text-black text-base'>User</div>
+            <div className='text-gray-500	text-sm w-16 truncate'>{account}</div>
+          </div>
+        </div></>)}
+      {!account && <div
         onClick={() => {
           // Toast('Connect Wallet', 'success');
           setIsModalOpen(true);
@@ -94,7 +114,7 @@ const SettingsMenu = () => {
         className='font-bold	text-black text-base flex items-center justify-center rounded-lg	 border-textHig border h-10 w-[212px] cursor-pointer mx-auto mb-3'
       >
         Connect Wallet
-      </div>
+      </div>}
 
       {isModalOpen && (
         <PopupModal
@@ -103,7 +123,7 @@ const SettingsMenu = () => {
           cancelButton={false}
         >
           <div className='px-6 border-b border-gray-200 dark:border-gray-600 flex flex-col items-center gap-4'>
-            {wallet.accounts.length === 0 && (
+            {account === '' && (
               <div className='w-[648px]'>
                 <div className='text-center text-[36px] leading-[56px] font-blob w-[408px] mx-auto mb-2'>
                   Connect wallet to ask more questions.
@@ -121,9 +141,9 @@ const SettingsMenu = () => {
                 </div>
               </div>
             )}
-            {wallet.accounts.length > 0 && (
+            {account !== '' && (
               <div className='w-[363px] mx-[120px] text-center'>
-                <div className='text-xl mb-2'>{wallet.accounts[0]}</div>
+                <div className='text-xl mb-2'>{account}</div>
                 <div className='text-2xl font-bold'>Insight Points</div>
                 <div className='py-6 text-[48px] font-medium text-textHig'>
                   66
@@ -138,7 +158,7 @@ const SettingsMenu = () => {
                   3/5
                 </div>
                 <div className='text-2xl mb-4'>valid questions today.</div>
-                <div className='text-xl text-dark-gray border-b-2 mb-10 inline-block	'>
+                <div onClick={logout} className='text-xl cursor-pointer text-dark-gray border-b-2 mb-10 inline-block	'>
                   Log out
                 </div>
               </div>
